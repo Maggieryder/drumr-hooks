@@ -63,11 +63,11 @@ const Controls = ({ voices }) => {
         <CurrentValue>{Math.round(pan/10).toString()}</CurrentValue>
       </Control>
       <Control>
-        <Switch></Switch>
+        <Switch active='red'></Switch>
         <Label>Mute</Label>
       </Control>
       <Control>
-        <Switch></Switch>
+        <Switch active='green'></Switch>
         <Label>Solo</Label>
       </Control>
     </div>
