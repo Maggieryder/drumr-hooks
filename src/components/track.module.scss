@@ -1,0 +1,18 @@
+@import '../scss/vars';
+
+.track {
+  display: grid;
+  /* grid-template-columns: repeat(4, 1fr); */
+  grid-template-rows: 1fr auto;
+  width: 100%;
+  height: auto;
+
+  .controls-mask {
+    width: 100%;
+    height:61px;
+    // overflow: hidden;
+  }
+}
+
+
+

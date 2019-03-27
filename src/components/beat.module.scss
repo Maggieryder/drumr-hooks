@@ -1,0 +1,19 @@
+.beat {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+
+  > div {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    transform-origin: center;
+    font-size: .875rem;
+    color: white;
+  }
+}

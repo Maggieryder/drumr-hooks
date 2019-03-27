@@ -1,0 +1,11 @@
+@import '../scss/vars';
+
+.control {
+  position: relative;
+  box-sizing: border-box;
+  display: grid;
+  align-items: center;
+  height: 100%;   
+  border-left: 1px solid $white-01;
+  padding: 0 1rem;
+}
