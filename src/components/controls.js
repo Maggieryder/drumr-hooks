@@ -16,6 +16,8 @@ const Controls = ({ voices }) => {
   const [ delay, setDelay ] = useState(0)
   const [ gain, setGain ] = useState(0)
   const [ pan, setPan] = useState(0)
+  const [ isMute, setIsMute] = useState(false)
+  const [ isSolo, setIsSolo] = useState(false)
   // const [ compression, setCompression ] = useState(0)
 
   useEffect(() => {
@@ -24,11 +26,13 @@ const Controls = ({ voices }) => {
     // console.log('[Track] delay', delay)
     // console.log('[Track] gain', gain)
     // console.log('[Track] pan', pan)
+    console.log('[Track] isMute', isMute)
+    console.log('[Track] isSolo', isSolo)
 
     return (() => {
       
     })
-  }, [instrument,reverb, delay, gain, pan]);
+  }, [instrument,reverb, delay, gain, pan, isMute, isSolo]);
 
   const style = {
     // 
@@ -63,11 +67,11 @@ const Controls = ({ voices }) => {
         <CurrentValue>{Math.round(pan/10).toString()}</CurrentValue>
       </Control>
       <Control>
-        <Switch active='red'></Switch>
+        <Switch isOn={isMute} onClick={() => setIsMute(!isMute)} activeClass='red' />
         <Label>Mute</Label>
       </Control>
       <Control>
-        <Switch active='green'></Switch>
+        <Switch isOn={isSolo} onClick={() => setIsSolo(!isSolo)} activeClass='rgb(21, 255, 0)' />
         <Label>Solo</Label>
       </Control>
     </div>

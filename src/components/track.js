@@ -17,9 +17,10 @@ const Track = (props) => {
   return (
     <div className={classes.track}>
       <Bars />
-      <div className={classes['controls-mask']}>
+      <Controls voices={voices} /> 
+      {/* <div className={classes['controls-mask']}>
         <Controls voices={voices} />  
-      </div>
+      </div> */}
     </div>
   );
 }

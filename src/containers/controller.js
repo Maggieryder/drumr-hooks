@@ -17,12 +17,12 @@ const Controller = (props) => {
   const [ error, setError] = useState(null);
   const kitInputRef = useRef();
 
-  useEffect(() => {
-    window.addEventListener('mousemove', handleMouseMove)
-    return (() => {
-      window.removeEventListener('mousemove', handleMouseMove)
-    })
-  }, []);
+  // useEffect(() => {
+  //   window.addEventListener('mousemove', handleMouseMove)
+  //   return (() => {
+  //     window.removeEventListener('mousemove', handleMouseMove)
+  //   })
+  // }, []);
 
   useEffect(() => {
     console.log('[Controller] kit', kit)
@@ -59,7 +59,6 @@ const Controller = (props) => {
 
   return (
     <div className={classes.controller}>
-      Hey ho!
       {/* <Select
         className='select-kit'
         style={{color: '#000000'}}
