@@ -1,13 +1,13 @@
 {
-  "main.css": "/hooks-drumr/static/css/main.fadb4686.chunk.css",
-  "main.js": "/hooks-drumr/static/js/main.5787a0c6.chunk.js",
-  "main.js.map": "/hooks-drumr/static/js/main.5787a0c6.chunk.js.map",
-  "runtime~main.js": "/hooks-drumr/static/js/runtime~main.5dddb1d5.js",
-  "runtime~main.js.map": "/hooks-drumr/static/js/runtime~main.5dddb1d5.js.map",
-  "static/js/2.a5b60800.chunk.js": "/hooks-drumr/static/js/2.a5b60800.chunk.js",
-  "static/js/2.a5b60800.chunk.js.map": "/hooks-drumr/static/js/2.a5b60800.chunk.js.map",
-  "index.html": "/hooks-drumr/index.html",
-  "precache-manifest.9beeb977d50fc50d49914cd4abfc0b41.js": "/hooks-drumr/precache-manifest.9beeb977d50fc50d49914cd4abfc0b41.js",
-  "service-worker.js": "/hooks-drumr/service-worker.js",
-  "static/css/main.fadb4686.chunk.css.map": "/hooks-drumr/static/css/main.fadb4686.chunk.css.map"
+  "main.css": "/static/css/main.fadb4686.chunk.css",
+  "main.js": "/static/js/main.26ffde0b.chunk.js",
+  "main.js.map": "/static/js/main.26ffde0b.chunk.js.map",
+  "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
+  "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
+  "static/js/2.a5b60800.chunk.js": "/static/js/2.a5b60800.chunk.js",
+  "static/js/2.a5b60800.chunk.js.map": "/static/js/2.a5b60800.chunk.js.map",
+  "index.html": "/index.html",
+  "precache-manifest.d42bab20f4df170f3a387b7c78f1b025.js": "/precache-manifest.d42bab20f4df170f3a387b7c78f1b025.js",
+  "service-worker.js": "/service-worker.js",
+  "static/css/main.fadb4686.chunk.css.map": "/static/css/main.fadb4686.chunk.css.map"
 }
