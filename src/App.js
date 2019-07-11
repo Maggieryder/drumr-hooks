@@ -1,13 +1,19 @@
 import React from 'react';
 // import './App.scss';
-import Controller from './containers/controller'
+// import { loadData } from './store/actions'
+
+import { DrumrProvider } from "./DrumrContext";
+
+import Controller from './containers/controller2'
 
 const App = (props) => {
-  console.log(props)
-  return (
-    <div className="App">
-      <Controller/>
-    </div>
+  // console.log(props)
+  return ( 
+    <DrumrProvider>
+      <div className="App">
+        <Controller/>
+      </div>
+    </DrumrProvider>
   );
 }
 

@@ -7,11 +7,17 @@ import Label from './ui/label'
 import CurrentValue from './ui/currentValue'
 import Switch from './ui/switch'
 
+import useDrumr from '../hooks/useDrumr'
+
 import classes from './controls.module.scss'
 
-const Controls = ({ voices }) => {
+const Controls = () => {
 
-  const [ instrument, setInstrument ] = useState('kik')
+  const { kits, currentKit, verbs, currentVerb } = useDrumr();
+
+  const [ voices, setVoices ] = useState( [ { label: '...', value: '0'}] )
+
+  const [ currentVoice, setCurrentVoice ] = useState(0)
   const [ reverb, setReverb ] = useState(0)
   const [ delay, setDelay ] = useState(0)
   const [ gain, setGain ] = useState(0)
@@ -19,7 +25,17 @@ const Controls = ({ voices }) => {
   // const [ compression, setCompression ] = useState(0)
 
   useEffect(() => {
-    // console.log('[Track] instrument', instrument)
+      if (kits) {
+        setVoices(kits[currentKit].voices)
+        console.log('[ Tracks ] voices', voices)
+      }  
+      return (() => {
+        
+      })
+    }, [kits, currentKit]);
+
+  useEffect(() => {
+    console.log('[Track] currentVoice', currentVoice)
     // console.log('[Track] reverb', reverb)
     // console.log('[Track] delay', delay)
     // console.log('[Track] gain', gain)
@@ -28,7 +44,7 @@ const Controls = ({ voices }) => {
     return (() => {
       
     })
-  }, [instrument,reverb, delay, gain, pan]);
+  }, [currentVoice, reverb, delay, gain, pan]);
 
   const style = {
     // 
@@ -38,9 +54,9 @@ const Controls = ({ voices }) => {
     <div className={classes.controls}> 
       <Control>
         <Select
-          options={voices}
-          onValueChange={value => setInstrument(value)}
-        /> 
+          options={ voices }
+          onValueChange={value => setCurrentVoice(value)}
+          />
       </Control> 
       <Control>
         <InputRange id='reverb' min={0} max={100} step={1} onChange={e => setReverb(e.target.value)} value={+reverb}></InputRange>

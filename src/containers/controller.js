@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useReducer, useState, useContext, useEffect, useRef } from 'react'
 import axios from 'axios'
 import Select from '../components/ui/select'
 // import Select from 'react-select'
@@ -7,48 +7,108 @@ import Processors from '../components/processors'
 
 import classes from './controller.module.scss'
 
-const API_URL = 'http://some-api.com'
+
+import DrumrContext from '../DrumrContext'
+import { setCurrentKit } from '../store/actions'
+import reducer from '../store/reducer'
+
+
+
+const initialState = {
+  loading: false,
+  error: null,
+  kits: null,
+  verbs: null,
+  kitBuffers: {},
+  verbBuffers: {},
+  currentKit: 0,
+  currentVerb: 0
+};
 
 const Controller = (props) => {
   const [ mousePosition, setMousePosition ] = useState({x:null,y:null})
-  const [ kit, setKit ] = useState('Feelin')
-  const [ buffers, setBuffers] = useState(null)
-  const [ loading, setLoading] = useState(false);
-  const [ error, setError] = useState(null);
-  const kitInputRef = useRef();
+  // const [ kits, setKits ] = useState(null)
+  // const [ currentKit , setCurrentKit ] = useState(null)
+  // const [ buffers, setBuffers] = useState({})
+  // const [ loading, setLoading] = useState(true);
+  // const [ error, setError] = useState(null);
+  const [ state, dispatch ] = useReducer(reducer, initialState);
+  // const kitInputRef = useRef();
 
-  useEffect(() => {
-    window.addEventListener('mousemove', handleMouseMove)
-    return (() => {
-      window.removeEventListener('mousemove', handleMouseMove)
-    })
-  }, []);
+  // const value = useContext(DrumrContext);
+  // console.log('Context', value);
 
-  useEffect(() => {
-    console.log('[Controller] kit', kit)
-    // getBuffers(kit)
-    return (() => {
+  // useEffect(() => {
+  //   window.addEventListener('mousemove', handleMouseMove)
+  //   return (() => {
+  //     window.removeEventListener('mousemove', handleMouseMove)
+  //   })
+  // }, []);
+  // useEffect(() => {
+  //   loadData('resources')
+  //   return (() => {
       
-    })
-  }, [kit]);
+  //   })
+  // }, []);
 
-  const getBuffers = async () => {
-    setLoading(true);
-    try {
-      const response = await axios.get(`${API_URL}?query=${kit}`)
-      setBuffers(response.data.buffers)
-    } catch (err) {
-      setError(err);
-    }
-    setLoading(false);
-  };
+  // useEffect(() => {
+  //   console.log('[Controller] kit', currentKit)
+  //   if (currentKit) loadBuffers(currentKit)  
+  //   return (() => {
+      
+  //   })
+  // }, [currentKit]);
 
-  const options = [
-    { value: 'Feelin', label: 'Feelin Kit' },
-    { value: 'Floor', label: 'Floor Kit' },
-    { value: 'Jazz', label: 'Jazz Kit' },
-    { value: 'Nasty Raw', label: 'Nasty Raw Kit' }
-  ]
+  // const loadData = async (url) => {
+  //   // setLoading(true);
+  //   try {
+  //     const response = await axios.get(`${url}.json`)
+  //     console.log('Success!',response.data.kits);
+  //     setLoading(false);
+  //     setKits(response.data.kits); 
+  //     setCurrentKit(kits[1]); 
+  //   } catch (err) {
+  //     // setLoading(false);
+  //     setError(err);
+  //   }
+  // }
+
+  // function loadSample(context, url, callback) {
+  //   const request = new XMLHttpRequest();
+  //   //header('Access-Control-Allow-Origin: *');
+  //   request.open('get', url, true);
+  //   request.responseType = 'arraybuffer';
+  //   request.onload = function() {
+  //     context.decodeAudioData(request.response, function(buffer) {
+  //       callback(buffer);
+  //     },
+  //     function(e){ alert("Error with decoding audio data", e ); });
+  //   };
+  //   request.send();
+  // }
+  
+  // function loadBuffers(kit){
+  //   setLoading(true);
+  //   const directory = kit.directory,
+  //   voices = kit.voices;
+  //   let samples = [],
+  //   samplesToLoad = voices.length;
+  //   for (let i = 0;i<voices.length;i++){
+  //     samples[i] = { name:voices[i].name, buffer:{} };
+  //     loadSample(CTX, 'assets/audio/'+ directory + voices[i].smple, (buffer) => {
+  //         //console.log(buffer);
+  //         samples[i].buffer = buffer;
+  //         samplesToLoad --;
+  //         console.log('samplesToLoad', samplesToLoad);
+  //         if (samplesToLoad < 1) {
+  //           setBuffers(samples);
+  //           setLoading(false);
+  //           console.log('done!')      
+  //         } 
+  //       }
+  //     )
+  //   }
+  // }
 
   const handleMouseMove = event => {
     setMousePosition({
@@ -58,28 +118,30 @@ const Controller = (props) => {
   }
 
   return (
-    <div className={classes.controller}>
-      
-      {/* <Select
-        className='select-kit'
-        style={{color: '#000000'}}
-        isSearchable={false}
-        defaultValue={kit}
-        controlShouldRenderValue={true}
-        // selectOption={kit}
-        // ref={queryInputRef}
-        value={kit}
-        onChange={option => setKit(option.value)}
-        options={options}
-      /> */}
-      <Select
-        options={options}
-        onValueChange={value => setKit(value)}
-      />
-      <Tracks />
-      <Processors />
-      <div>{mousePosition.x} {mousePosition.y}</div>
-    </div>
+    <DrumrContext.Provider value={ [ state, dispatch ] }>
+      <div className={classes.controller}>
+        
+        {/* <Select
+          className='select-kit'
+          style={{color: '#000000'}}
+          isSearchable={false}
+          defaultValue={kit}
+          controlShouldRenderValue={true}
+          // selectOption={kit}
+          // ref={queryInputRef}
+          value={kit}
+          onChange={option => setCurrentKit(option.value)}
+          options={options}
+        /> */}
+        { state.kits ? <Select
+          options={state.kits}
+          onValueChange={value => setCurrentKit(state.kits[value]) }
+        /> : null }
+        <Tracks />
+        <Processors />
+        <div>{mousePosition.x} {mousePosition.y}</div>
+      </div>
+    </DrumrContext.Provider>
   );
 }
 
