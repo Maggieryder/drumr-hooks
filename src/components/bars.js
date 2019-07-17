@@ -4,13 +4,18 @@ import Bar from './bar'
 
 import classes from './bars.module.scss'
 
-const Bars = (props) => {
+const Bars = ( { trackId } ) => {
+  useEffect(() => {
+    console.log('[ Bars ] trackId', trackId)
+    return (() => {
+      
+    })
+  }, []);
   return (
     <div className={classes.bars}>
-      <Bar />
-      <Bar />
-      <Bar />
-      <Bar />
+      {[0,1].map(i => {
+        return <Bar key={i} trackId={trackId} barId={i}/>
+      })}
     </div>
   )
 }

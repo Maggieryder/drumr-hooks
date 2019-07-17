@@ -2,8 +2,12 @@ import axios from 'axios'
 import { useContext } from 'react'
 import { DrumrContext } from '../DrumrContext'
 import { initAudioCtx } from '../api/AudioCtx'
+import SQR from '../api/Sequencer'
+
+import $ from "jquery";
 
 const CTX = initAudioCtx()
+const Sequencer = new SQR(CTX);
 
 const useDrumr = () => {
   const [state, setState] = useContext(DrumrContext);
@@ -84,6 +88,16 @@ const useDrumr = () => {
     }));
   }
 
+  const onNoteTap = (trackId, barId, stepId) => {
+    // e.preventDefault();
+    console.log('trackIndex', trackId, 'bar', barId, 'step', stepId);
+    // console.log('Sequencer.running', Sequencer.running());
+    if (!Sequencer.running()){
+      // MIXER.tracks[trackIndex].triggerSample(CTX.currentTime);
+      // Sequencer.sequenceNote(trackId, barId, stepId);
+    }  
+  }
+
   
 
   // function playTrack(index) {
@@ -134,7 +148,8 @@ const useDrumr = () => {
     kitBuffers,
     verbBuffers,
     currentKit,
-    currentVerb
+    currentVerb,
+    onNoteTap
   }
 };
 

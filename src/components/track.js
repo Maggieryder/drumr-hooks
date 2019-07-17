@@ -7,7 +7,7 @@ import Controls from './controls'
 
 import classes from './track.module.scss'
 
-const Track = () => {
+const Track = ( { trackId } ) => {
 
   // const { kits, currentKit, verbs, currentVerb } = useDrumr();
   // let voices = []
@@ -22,10 +22,16 @@ const Track = () => {
   //   })
   // }, [kits, currentKit]);
 
+  useEffect(() => {
+    console.log('[ Tracks ] trackId', trackId)
+    return (() => {
+      
+    })
+  }, []);
 
   return (
     <div className={classes.track}>
-      <Bars />
+      <Bars trackId={trackId}/>
       <div className={classes['controls-mask']}>
         <Controls />  
       </div>

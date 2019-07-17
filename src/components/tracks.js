@@ -15,11 +15,10 @@ const Tracks = ({tracks}) => {
   return (
     <div className={classes.tracks}>
       {/* tracks.map(track => <Track />) */}
-      <Track />
-      <Track />
-      <Track />
-      <Track />
-      <Track />
+      
+      {[0,1,2,3,4].map(i => {
+        return <Track key={i} trackId={i}/>
+      })}
     </div>
   );
 }

@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react'
 
-import Beat from './beat'
+import Step from './step'
 
 import classes from './bar.module.scss'
 
-const Bar = (props) => {
+import useDrumr from '../hooks/useDrumr'
+
+const Bar = ( { trackId, barId } ) => {
+
+  const { onNoteTap } = useDrumr();
 
   // const [ isOn, setIsOn ] = useState(false)
 
@@ -29,10 +33,9 @@ const Bar = (props) => {
     <div 
       className={classes.bar} 
       style={style}>
-      <Beat velocity={.5} />
-      <Beat velocity={.5} />
-      <Beat velocity={.5} />
-      <Beat velocity={.5} />
+        {[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15].map(i => {
+          return <Step key={i} step={(i/4) + 1} onTap={() => onNoteTap(trackId, barId, i)} velocity={.5} />
+        })}
     </div>
   );
 }

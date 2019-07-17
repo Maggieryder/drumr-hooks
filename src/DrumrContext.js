@@ -8,7 +8,8 @@ const initialState = {
   kitBuffers: {},
   verbBuffers: {},
   currentKit: 0,
-  currentVerb: 0
+  currentVerb: 0,
+  sequences: []
 };
 
 const DrumrContext =  React.createContext([{}, () => {}])

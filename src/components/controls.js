@@ -37,13 +37,13 @@ const Controls = () => {
     }, [kits, currentKit]);
 
   useEffect(() => {
-    console.log('[Track] currentVoice', currentVoice)
+    // console.log('[Track] currentVoice', currentVoice)
     // console.log('[Track] reverb', reverb)
     // console.log('[Track] delay', delay)
     // console.log('[Track] gain', gain)
     // console.log('[Track] pan', pan)
-    console.log('[Track] isMute', isMute)
-    console.log('[Track] isSolo', isSolo)
+    // console.log('[Track] isMute', isMute)
+    // console.log('[Track] isSolo', isSolo)
 
     return (() => {
       

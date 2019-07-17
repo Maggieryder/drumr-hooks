@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 // import PropTypes from 'prop-types'
-import classes from './beat.module.scss'
+import classes from './step.module.scss'
 
-const Beat = ({ velocity, sustain }) => {
+const Step = ({ onTap, step, velocity, sustain }) => {
 
-  const [ isOn, setIsOn ] = useState(false)
+  const [ isOn, setIsOn ] = useState(false);
 
   useEffect(() => {
     // 
@@ -16,19 +16,20 @@ const Beat = ({ velocity, sustain }) => {
   const style = {
     // width: `calc(50px * ${velocity}`,
     // height: `calc(50px * ${velocity}`,
-    transform: `scale(${velocity})`,
-    background: isOn ? 'red' : 'rgba(255,255,255,.2)'
+    // transform: `scale(${velocity})`,
+    background: isOn ? 'red' : '#505258'
   }
 
   const handleClick = event => {
     // prevIsOn = !prevIsOn
     setIsOn(!isOn)
+    onTap()
   }
 
   return (
     <div onClick={handleClick}
       className={classes.beat} >
-        <div style={style} >{velocity}</div>
+        <div style={style} >{(step)}</div>
     </div>
   );
 }
@@ -37,4 +38,4 @@ const Beat = ({ velocity, sustain }) => {
 
 // }
 
-export default Beat
+export default Step

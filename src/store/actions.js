@@ -4,6 +4,8 @@ import { dispatch } from '../DrumrContext'
 
 export const CTX = initAudioCtx();
 
+// import { Sequencer } from '../api/Sequencer'
+
 /** PRIVATE ACTIONS **/
 function initAudioCtx(){
   try {
