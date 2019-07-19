@@ -9,7 +9,7 @@ import classes from './controller.module.scss'
 const Controller = () => {
   const { isLoading, kits, currentKit, verbs, currentVerb, loadData, loadBuffers, setCurrentKit } = useDrumr();
   useEffect(() => {
-    loadData('resources')
+    loadData('./resources')
     return (() => {
       
     })
