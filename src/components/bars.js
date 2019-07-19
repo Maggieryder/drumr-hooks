@@ -4,7 +4,7 @@ import Bar from './bar'
 
 import classes from './bars.module.scss'
 
-const Bars = ( { trackId } ) => {
+const Bars = ( { trackId} ) => {
   useEffect(() => {
     console.log('[ Bars ] trackId', trackId)
     return (() => {
