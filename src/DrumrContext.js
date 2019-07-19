@@ -9,6 +9,7 @@ const initialState = {
   verbBuffers: {},
   currentKit: 0,
   currentVerb: 0,
+  signature:'4/4',
   sequences: []
 };
 

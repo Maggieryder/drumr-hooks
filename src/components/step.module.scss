@@ -17,9 +17,10 @@
     font-size: .7rem;
     line-height: 30px;
     color: transparent;
+    user-select: none;
   } 
 }
-
+// .beat:nth-child(3n + 1) {
 .beat:nth-child(4n + 1) {
   > div {
     width: 30px;

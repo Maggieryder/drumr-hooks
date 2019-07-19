@@ -3,6 +3,7 @@
 .bar {
   position: relative;
   display: grid;
+  // grid-template-columns: repeat(12, 1fr);
   grid-template-columns: repeat(16, 1fr);
   height: 100%;
   border-right: 1px solid $white-01;

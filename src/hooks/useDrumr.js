@@ -19,7 +19,10 @@ const useDrumr = () => {
     kitBuffers,
     verbBuffers,
     currentKit,
-    currentVerb } = state
+    currentVerb, 
+    signature,
+    sequences
+     } = state
 
   const loadData = async (url) => {
     setState(state => ({ ...state, isLoading: true }));
@@ -149,7 +152,9 @@ const useDrumr = () => {
     verbBuffers,
     currentKit,
     currentVerb,
-    onNoteTap
+    onNoteTap,
+    signature,
+    sequences
   }
 };
 
