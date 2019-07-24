@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import Track from './track'
-import useDrumr from '../hooks/useDrumr'
 import classes from './tracks.module.scss'
 
 const Tracks = ({tracks}) => {
@@ -13,13 +12,13 @@ const Tracks = ({tracks}) => {
   }, []);
 
   return (
-    <div className={classes.tracks}>
-      {/* tracks.map(track => <Track />) */}
-      
-      {[0,1,2,3,4].map(i => {
-        return <Track key={i} trackId={i}/>
-      })}
-    </div>
+      <div className={classes.tracks}>
+        {/* tracks.map(track => <Track />) */}
+        
+        {[0,1,2,3,4].map(i => {
+          return <Track key={i} trackId={i}/>
+        })}
+      </div>
   );
 }
 

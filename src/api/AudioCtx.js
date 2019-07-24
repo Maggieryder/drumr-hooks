@@ -1,4 +1,4 @@
-function initAudioCtx(){
+const initAudioCtx = () => {
   try {
     // Fix up for prefixing
     window.AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -13,5 +13,8 @@ function initAudioCtx(){
     alert('Web Audio API is not supported in this browser');
   }
 }
+
+
+
 
 export { initAudioCtx }

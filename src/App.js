@@ -2,9 +2,9 @@ import React from 'react';
 // import './App.scss';
 // import { loadData } from './store/actions'
 
-import { DrumrProvider } from "./DrumrContext";
+import { DrumrProvider } from "./context/DrumrContext";
 
-import Controller from './containers/controller2'
+import Controller from './containers/controller'
 
 const App = (props) => {
   // console.log(props)

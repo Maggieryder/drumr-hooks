@@ -13,11 +13,11 @@ import classes from './controls.module.scss'
 
 const Controls = () => {
 
-  const { kits, currentKit, verbs, currentVerb } = useDrumr();
+  const { kits, currentKit, currentVoice, verbs, currentVerb, setCurrentVoice } = useDrumr();
 
   const [ voices, setVoices ] = useState( [ { label: '...', value: '0'}] )
 
-  const [ currentVoice, setCurrentVoice ] = useState(0)
+  // const [ currentVoice, setCurrentVoice ] = useState(0)
   const [ reverb, setReverb ] = useState(0)
   const [ delay, setDelay ] = useState(0)
   const [ gain, setGain ] = useState(0)

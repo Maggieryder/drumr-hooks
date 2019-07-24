@@ -3,6 +3,8 @@ import React, { useEffect } from 'react'
 import Bars from './bars'
 import Controls from './controls'
 
+import { TrackProvider } from "../context/TrackContext";
+
 // import useDrumr from '../hooks/useDrumr'
 
 import classes from './track.module.scss'
@@ -30,12 +32,14 @@ const Track = ( { trackId } ) => {
   }, []);
 
   return (
-    <div className={classes.track}>
-      <Bars trackId={trackId}/>
-      <div className={classes['controls-mask']}>
-        <Controls />  
+    <TrackProvider>
+      <div className={classes.track}>
+        <Bars trackId={trackId}/>
+        <div className={classes['controls-mask']}>
+          <Controls />  
+        </div>
       </div>
-    </div>
+    </TrackProvider>
   );
 }
 

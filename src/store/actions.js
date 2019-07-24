@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import { dispatch } from '../DrumrContext'
+import { dispatch } from '../context/DrumrContext'
 
 export const CTX = initAudioCtx();
 

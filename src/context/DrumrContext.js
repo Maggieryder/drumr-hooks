@@ -8,6 +8,7 @@ const initialState = {
   kitBuffers: {},
   verbBuffers: {},
   currentKit: 0,
+  currentVoice: 0,
   currentVerb: 0,
   signature:'4/4',
   sequences: []

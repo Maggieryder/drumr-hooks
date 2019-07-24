@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { useContext } from 'react'
-import { DrumrContext } from '../DrumrContext'
+import { DrumrContext } from '../context/DrumrContext'
 import { initAudioCtx } from '../api/AudioCtx'
 import SQR from '../api/Sequencer'
 
@@ -19,6 +19,7 @@ const useDrumr = () => {
     kitBuffers,
     verbBuffers,
     currentKit,
+    currentVoice,
     currentVerb, 
     signature,
     sequences
@@ -42,6 +43,11 @@ const useDrumr = () => {
         loading: false
       })
     }
+  }
+
+  const setSound = ({ sounds }, { name, buffer }) => {
+    const sound = sounds.find((s) => s.name === name);
+    sound.buffer = buffer;
   }
 
   const loadBuffer = async (context, url, callback) => {
@@ -88,6 +94,14 @@ const useDrumr = () => {
     setState(state => ({ 
       ...state, 
       currentKit: index 
+    }));
+  }
+
+  const setCurrentVoice = index => {
+    console.log('setCurrentVoice', index)
+    setState(state => ({ 
+      ...state, 
+      currentVoice: index 
     }));
   }
 
@@ -144,6 +158,7 @@ const useDrumr = () => {
     loadData,
     loadBuffers,
     setCurrentKit,
+    setCurrentVoice,
     isLoading,
     error,
     kits,
@@ -151,6 +166,7 @@ const useDrumr = () => {
     kitBuffers,
     verbBuffers,
     currentKit,
+    currentVoice,
     currentVerb,
     onNoteTap,
     signature,
