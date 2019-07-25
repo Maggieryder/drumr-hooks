@@ -3,8 +3,9 @@
 .bars {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  width: 100%;
+  width: auto;
   height: 50px;
   border-top: 1px solid $white-01;
   border-bottom: 1px solid $white-01;
+  overflow: hidden;
 }

@@ -7,7 +7,7 @@ import Processors from '../components/processors'
 import classes from './controller.module.scss'
 
 const Controller = () => {
-  const { isLoading, kits, currentKit, verbs, currentVerb, loadData, loadBuffers, setCurrentKit, kitBuffers } = useDrumr();
+  const { isLoading, kits, currentKit, loadData, loadBuffers, setCurrentKit } = useDrumr();
   useEffect(() => {
     loadData('./resources')
     return (() => {
@@ -23,12 +23,13 @@ const Controller = () => {
       
     })
   }, [kits, currentKit]);
-  useEffect(() => {
-    console.log('kitBuffers', kitBuffers)
-    return (() => {
+
+  // useEffect(() => {
+  //   console.log('kitBuffers', kitBuffers)
+  //   return (() => {
       
-    })
-  }, [kitBuffers]);
+  //   })
+  // }, [kitBuffers]);
   // useEffect(() => {
   //   if (verbs) {
   //     console.log('verbs', verbs)

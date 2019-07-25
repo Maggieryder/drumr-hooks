@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
 import classes from './step.module.scss'
 
 const Step = ({ onTap, step, velocity, sustain }) => {
@@ -34,8 +34,8 @@ const Step = ({ onTap, step, velocity, sustain }) => {
   );
 }
 
-// Beat.propTypes = {
+Step.propTypes = {
 
-// }
+}
 
 export default Step

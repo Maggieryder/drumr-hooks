@@ -19,9 +19,11 @@ const useDrumr = () => {
     kitBuffers,
     verbBuffers,
     currentKit,
-    currentVoice,
     currentVerb, 
     signature,
+    numBars,
+    numBeats,
+    numSteps,
     sequences
      } = state
 
@@ -170,6 +172,9 @@ const useDrumr = () => {
     currentVerb,
     onNoteTap,
     signature,
+    numBars,
+    numSteps,
+    numBeats,
     sequences
   }
 };

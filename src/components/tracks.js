@@ -1,15 +1,16 @@
 import React, { useEffect } from 'react'
+import PropTypes from 'prop-types'
 import Track from './track'
 import classes from './tracks.module.scss'
 
-const Tracks = ({tracks}) => {
+const Tracks = ( { tracks } ) => {
 
   useEffect(() => {
  
     return (() => {
       
     })
-  }, []);
+  }, [ tracks ]);
 
   return (
       <div className={classes.tracks}>
@@ -20,6 +21,10 @@ const Tracks = ({tracks}) => {
         })}
       </div>
   );
+}
+
+Tracks.propType = {
+  tracks: PropTypes.arrayOf(PropTypes.object)
 }
 
 export default Tracks

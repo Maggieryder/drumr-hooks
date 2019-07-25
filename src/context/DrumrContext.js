@@ -6,11 +6,13 @@ const initialState = {
   kits: null,
   verbs: null,
   kitBuffers: [{ label: '...', value: '0'}],
-  verbBuffers: {},
+  verbBuffers: [{ label: '...', value: '0'}],
   currentKit: 0,
-  currentVoice: 0,
   currentVerb: 0,
   signature:'4/4',
+  numBars: 2,
+  numBeats: 3,
+  numSteps: 12,
   sequences: []
 };
 
