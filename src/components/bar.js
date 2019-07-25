@@ -33,7 +33,7 @@ const Bar = ( { trackId, barId } ) => {
       style={style}>
         {steps.map(i => {
           // return <Step key={i} step={(i/4) + 1} onTap={() => onNoteTap(trackId, barId, i)} velocity={.5} />
-          return <Step key={i} step={Math.floor(i/numBeats) + 1} onTap={() => onNoteTap(trackId, barId, i)} velocity={.5} />
+          return <Step key={i} className='beat' step={Math.floor(i/numBeats) + 1} onTap={() => onNoteTap(trackId, barId, i)} velocity={.5} />
         })}
     </div>
   );

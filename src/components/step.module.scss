@@ -1,4 +1,4 @@
-.beat {
+.step {
   z-index:2;
   display: grid;
   justify-content: center;
@@ -19,13 +19,13 @@
     color: transparent;
     user-select: none;
   } 
-}
-.beat:nth-child(3n + 1) {
-// .beat:nth-child(4n + 1) {
-
-  > div {
-    width: 30px;
-    height: 30px;
-    color: #202020;
+  &.beat {
+  // .beat:nth-child(4n + 1) {
+  
+    > div {
+      width: 30px;
+      height: 30px;
+      color: #202020;
+    }
   }
 }

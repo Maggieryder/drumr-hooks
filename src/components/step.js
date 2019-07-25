@@ -17,6 +17,8 @@ const Step = ({ onTap, step, velocity, sustain }) => {
     // width: `calc(50px * ${velocity}`,
     // height: `calc(50px * ${velocity}`,
     // transform: `scale(${velocity})`,
+    // width: isBeat ? '20px' : '30px',
+    // height: isBeat ? '20px' : '30px',
     background: isOn ? 'red' : '#505258'
   }
 
@@ -28,7 +30,7 @@ const Step = ({ onTap, step, velocity, sustain }) => {
 
   return (
     <div onClick={handleClick}
-      className={classes.beat} >
+      className={classes.step} >
         <div style={style} >{(step)}</div>
     </div>
   );
