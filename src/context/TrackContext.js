@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
 const initialState = {
-  id: null,
-  voice: { label: '', buffer: {}},
+  trackId: null,
+  voiceId: 0,
   gain: 0,
   pan: 0,
   reverbSend: 0,

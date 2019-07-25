@@ -5,7 +5,7 @@ const initialState = {
   error: null,
   kits: null,
   verbs: null,
-  kitBuffers: {},
+  kitBuffers: [{ label: '...', value: '0'}],
   verbBuffers: {},
   currentKit: 0,
   currentVoice: 0,

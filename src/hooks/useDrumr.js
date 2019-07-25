@@ -71,7 +71,7 @@ const useDrumr = () => {
     let buffers = [],
     buffersToLoad = voices.length;
     for (let i = 0;i<voices.length;i++){
-      buffers[i] = { label:voices[i].label, buffer:{}, value: i };
+      buffers[i] = { label:voices[i].label, buffer:{}, value: voices[i].value };
       loadBuffer(CTX, 'assets/audio/'+ directory + voices[i].smple, (buffer) => {
           //console.log(buffer);
           buffers[i].buffer = buffer;
@@ -97,13 +97,13 @@ const useDrumr = () => {
     }));
   }
 
-  const setCurrentVoice = index => {
-    console.log('setCurrentVoice', index)
-    setState(state => ({ 
-      ...state, 
-      currentVoice: index 
-    }));
-  }
+  // const setCurrentVoice = index => {
+  //   console.log('setCurrentVoice', index)
+  //   setState(state => ({ 
+  //     ...state, 
+  //     currentVoice: index 
+  //   }));
+  // }
 
   const onNoteTap = (trackId, barId, stepId) => {
     // e.preventDefault();
@@ -158,7 +158,7 @@ const useDrumr = () => {
     loadData,
     loadBuffers,
     setCurrentKit,
-    setCurrentVoice,
+    // setCurrentVoice,
     isLoading,
     error,
     kits,
@@ -166,7 +166,7 @@ const useDrumr = () => {
     kitBuffers,
     verbBuffers,
     currentKit,
-    currentVoice,
+    // currentVoice,
     currentVerb,
     onNoteTap,
     signature,

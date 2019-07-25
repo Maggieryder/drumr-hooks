@@ -13,6 +13,9 @@ import classes from './processors.module.scss'
 // const API_URL = 'http://some-api.com'
 
 const Processors = ({reverbs}) => {
+
+
+  // const { kits, currentKit, verbs, currentVerb } = useDrumr();
   // reverb processing
   const [reverbId, setReverbId] = useState(null)
   const [reverbOn, setReverbOn] = useState(false)
@@ -83,6 +86,7 @@ const Processors = ({reverbs}) => {
           <Select options={options} onValueChange={value => setReverbId(value)} />
         </Control>
       </Processor>
+      
       <Processor type='delay'>
         <Control>
           <Label>Delay</Label>

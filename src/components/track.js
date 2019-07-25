@@ -11,6 +11,8 @@ import classes from './track.module.scss'
 
 const Track = ( { trackId } ) => {
 
+  
+
   // const { kits, currentKit, verbs, currentVerb } = useDrumr();
   // let voices = []
 
@@ -36,7 +38,7 @@ const Track = ( { trackId } ) => {
       <div className={classes.track}>
         <Bars trackId={trackId}/>
         <div className={classes['controls-mask']}>
-          <Controls />  
+          <Controls trackId={trackId}/>  
         </div>
       </div>
     </TrackProvider>
