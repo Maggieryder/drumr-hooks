@@ -19,7 +19,9 @@ const Track = ( { trackId } ) => {
   return (
     <TrackProvider>
       <div className={classes.track}>
-        <Bars trackId={trackId}/>
+        <div className={classes['bars-mask']}>
+          <Bars trackId={trackId}/>
+        </div>
         <div className={classes['controls-mask']}>
           <Controls trackId={trackId}/>  
         </div>

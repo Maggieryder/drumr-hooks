@@ -2,7 +2,7 @@
 
 .bars {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  // grid-template-columns: repeat(2, 1fr);
   width: auto;
   height: 50px;
   border-top: 1px solid $white-01;

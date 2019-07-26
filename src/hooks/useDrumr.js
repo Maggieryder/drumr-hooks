@@ -21,10 +21,13 @@ const useDrumr = () => {
     currentKit,
     currentVerb, 
     signature,
+    tempo,
+    swing,
     numBars,
     numBeats,
     numSteps,
-    sequences
+    sequences,
+    tracks
      } = state
 
   const loadData = async (url) => {
@@ -70,6 +73,7 @@ const useDrumr = () => {
     setState(state => ({ ...state, isLoading: true }));
     const directory = obj.directory,
     voices = obj.voices;
+    console.log('loadBuffers voices', voices)
     let buffers = [],
     buffersToLoad = voices.length;
     for (let i = 0;i<voices.length;i++){
@@ -89,6 +93,10 @@ const useDrumr = () => {
         }
       )
     }
+  }
+
+  const assignBuffer = (buffer) => {
+
   }
 
   const setCurrentKit = index => {
@@ -115,6 +123,46 @@ const useDrumr = () => {
       // MIXER.tracks[trackIndex].triggerSample(CTX.currentTime);
       // Sequencer.sequenceNote(trackId, barId, stepId);
     }  
+  }
+
+  const setTempo = value => {
+    console.log('setTempo', value)
+    setState(state => ({ 
+      ...state, 
+      tempo: value 
+    }));
+  }
+
+  const setSwing = value => {
+    console.log('setSwing', value)
+    setState(state => ({ 
+      ...state, 
+      swing: value 
+    }));
+  }
+
+  const setNumBars = value => {
+    console.log('setNumBars', value)
+    setState(state => ({ 
+      ...state, 
+      numBars: value 
+    }));
+  }
+
+  const setNumBeats = value => {
+    console.log('setNumBars', value)
+    setState(state => ({ 
+      ...state, 
+      numBeats: value 
+    }));
+  }
+
+  const setNumSteps = value => {
+    console.log('setNumBars', value)
+    setState(state => ({ 
+      ...state, 
+      numSteps: value 
+    }));
   }
 
   
@@ -160,7 +208,6 @@ const useDrumr = () => {
     loadData,
     loadBuffers,
     setCurrentKit,
-    // setCurrentVoice,
     isLoading,
     error,
     kits,
@@ -168,14 +215,21 @@ const useDrumr = () => {
     kitBuffers,
     verbBuffers,
     currentKit,
-    // currentVoice,
     currentVerb,
     onNoteTap,
     signature,
+    tempo, 
+    swing,
     numBars,
     numSteps,
     numBeats,
-    sequences
+    sequences,
+    tracks, 
+    setTempo,
+    setSwing,
+    setNumBars,
+    setNumBeats,
+    setNumSteps
   }
 };
 

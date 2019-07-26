@@ -20,8 +20,13 @@ const Bars = ( { trackId } ) => {
     })
   }, [numBars])
 
+  const style = {
+    width: 'calc(100% * '+numBars/2+')',
+    gridTemplateColumns: 'repeat('+numBars+', 1fr)'
+  }
+
   return (
-    <div className={classes.bars}>
+    <div className={classes.bars} style={style}>
       {bars.map(i => {
         return <Bar key={i} trackId={trackId} barId={i}/>
       })}
@@ -30,7 +35,8 @@ const Bars = ( { trackId } ) => {
 }
 
 Bars.propTypes = {
-  trackId: PropTypes.number.isRequired
+  trackId: PropTypes.number.isRequired,
+  numBars: PropTypes.number
 }
 
 export default Bars

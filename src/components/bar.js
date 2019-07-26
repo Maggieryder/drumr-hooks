@@ -9,11 +9,9 @@ import useDrumr from '../hooks/useDrumr'
 
 const Bar = ( { trackId, barId } ) => {
 
-  const { onNoteTap, signature, numBeats, numSteps } = useDrumr();
+  const { onNoteTap, numBeats, numSteps } = useDrumr();
 
-  const [steps, setSteps] = useState([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15])
-
-  // const steps = signature === '3/4' ? [0,1,2,3,4,5,6,7,8,9,10,11] : [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+  const [steps, setSteps] = useState([])
 
   useEffect(() => {
     console.log('numBeats', numBeats)
@@ -32,8 +30,11 @@ const Bar = ( { trackId, barId } ) => {
       className={classes.bar} 
       style={style}>
         {steps.map(i => {
-          // return <Step key={i} step={(i/4) + 1} onTap={() => onNoteTap(trackId, barId, i)} velocity={.5} />
-          return <Step key={i} className='beat' step={Math.floor(i/numBeats) + 1} onTap={() => onNoteTap(trackId, barId, i)} velocity={.5} />
+          return <Step key={i} 
+                      step={Math.floor(i/numBeats) + 1} 
+                      isBeat={i % numBeats === 0} 
+                      onTap={() => onNoteTap(trackId, barId, i)} 
+                      velocity={.5} />
         })}
     </div>
   );
@@ -41,7 +42,10 @@ const Bar = ( { trackId, barId } ) => {
 
 Bar.propTypes = {
   trackId: PropTypes.number.isRequired,
-  barId: PropTypes.number.isRequired
+  barId: PropTypes.number.isRequired,
+  onNoteTap: PropTypes.func,
+  numBeats: PropTypes.number,
+  numSteps: PropTypes.number
 }
 
 export default Bar

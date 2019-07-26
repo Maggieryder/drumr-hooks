@@ -10,10 +10,13 @@ const initialState = {
   currentKit: 0,
   currentVerb: 0,
   signature:'4/4',
-  numBars: 2,
-  numBeats: 3,
-  numSteps: 12,
-  sequences: []
+  tempo: 96,
+  swing: 0,
+  numBars: 4,
+  numBeats: 4,
+  numSteps: 16,
+  sequences: [], 
+  tracks: []
 };
 
 const DrumrContext =  React.createContext([{}, () => {}])

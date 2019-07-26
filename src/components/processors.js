@@ -10,11 +10,13 @@ import Processor from './processor'
 
 import classes from './processors.module.scss'
 
+import useDrumr from '../hooks/useDrumr'
+
 // const API_URL = 'http://some-api.com'
 
 const Processors = ({reverbs}) => {
 
-
+  const { verbBuffers } = useDrumr();
   // const { kits, currentKit, verbs, currentVerb } = useDrumr();
   // reverb processing
   const [reverbId, setReverbId] = useState(null)
@@ -31,6 +33,15 @@ const Processors = ({reverbs}) => {
   const [compAttack, setCompAttack] = useState(0.01)
   const [compRelease, setCompRelease] = useState(0.25)
   const [compOn, setCompOn] = useState(false)
+
+  useEffect(() => {
+    if (verbBuffers) {
+      console.log('[ Processors ] verbBuffers', verbBuffers)
+    }  
+    return (() => {
+      
+    })
+  }, [verbBuffers]);
 
   useEffect(() => {
     console.log('[Processors] reverb', reverbId, reverbOn)
@@ -83,10 +94,10 @@ const Processors = ({reverbs}) => {
           <Switch isOn={reverbOn} onClick={ () => setReverbOn(!reverbOn)} activeClass='rgb(21, 255, 0)' />
         </Control>
         <Control>  
-          <Select options={options} onValueChange={value => setReverbId(value)} />
+          <Select options={verbBuffers} onValueChange={value => setReverbId(value)} />
         </Control>
       </Processor>
-      
+
       <Processor type='delay'>
         <Control>
           <Label>Delay</Label>
