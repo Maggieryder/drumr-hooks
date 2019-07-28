@@ -82,7 +82,7 @@ const useDrumr = () => {
           //console.log(buffer);
           buffers[i].buffer = buffer
           buffersToLoad --
-          console.log('samplesToLoad', buffersToLoad)
+          // console.log('samplesToLoad', buffersToLoad)
           if (buffersToLoad < 1) {
             setState(state => ({ 
               ...state, 

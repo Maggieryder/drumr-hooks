@@ -17,9 +17,9 @@ import useDrumr from '../hooks/useDrumr'
 const Processors = ({reverbs}) => {
 
   const { verbBuffers } = useDrumr();
-  // const { kits, currentKit, verbs, currentVerb } = useDrumr();
+
   // reverb processing
-  const [reverbId, setReverbId] = useState(null)
+  const [reverbId, setReverbId] = useState(0)
   const [reverbOn, setReverbOn] = useState(false)
   // dekay processing
   const [delayTime, setDelayTime] = useState(.5)
@@ -67,25 +67,6 @@ const Processors = ({reverbs}) => {
     })
   }, [compThreshold, compKnee, compRatio, compAttack, compRelease, compOn])
 
-
-  // const getStuff = async () => {
-  //   setLoading(true);
-  //   try {
-  //     const response = await axios.get(`${API_URL}?query=${query}`)
-  //     setStuff(response.data.stuff)
-  //   } catch (err) {
-  //     setError(err);
-  //   }
-  //   setLoading(false);
-  // };
-
-  const options = [
-    { value: 'Feelin', label: 'Feelin Kit' },
-    { value: 'Floor', label: 'Floor Kit' },
-    { value: 'Jazz', label: 'Jazz Kit' },
-    { value: 'Nasty Raw', label: 'Nasty Raw Kit' }
-  ]
-
   return (
     <div className={classes.processors}>
       <Processor type='reverb'>
@@ -94,7 +75,7 @@ const Processors = ({reverbs}) => {
           <Switch isOn={reverbOn} onClick={ () => setReverbOn(!reverbOn)} activeClass='rgb(21, 255, 0)' />
         </Control>
         <Control>  
-          <Select options={verbBuffers} onValueChange={value => setReverbId(value)} />
+          <Select options={verbBuffers} onValueChange={value => setReverbId(value)} initialValue={reverbId} />
         </Control>
       </Processor>
 

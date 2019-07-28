@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import useDrumr from '../hooks/useDrumr'
 import Select from '../components/ui/select'
 import InputRange from '../components/ui/inputRange'
 import Label from '../components/ui/label'
@@ -8,10 +7,29 @@ import Tracks from '../components/tracks'
 import Control from '../components/control'
 import Processors from '../components/processors'
 
+import useDrumr from '../hooks/useDrumr'
+
 import classes from './controller.module.scss'
 
 const Controller = () => {
-  const { isLoading, loadData, loadBuffers, kits, currentKit, setCurrentKit, verbs, tempo, setTempo, swing, setSwing, setNumBars, setNumBeats, setNumSteps } = useDrumr();
+  const { isLoading, 
+          loadData, 
+          loadBuffers, 
+          kits, 
+          currentKit, 
+          setCurrentKit, 
+          verbs, 
+          tempo, 
+          setTempo, 
+          swing, 
+          setSwing, 
+          numBars, 
+          setNumBars, 
+          numBeats, 
+          setNumBeats, 
+          numSteps, 
+          setNumSteps } = useDrumr();
+
   const numBarsOptions = [
     {label:'1', value:1},
     {label:'2', value:2},
@@ -33,9 +51,15 @@ const Controller = () => {
   }, []);
   useEffect(() => {
     if (kits) {
-      console.log('kits', kits)
+      console.log('kits', kits, currentKit)
       loadBuffers(kits[currentKit], 'kitBuffers')
     }  
+    return (() => {
+      
+    })
+  }, [kits, currentKit]);
+
+  useEffect(() => { 
     if (verbs) {
       console.log('verbs', verbs)
       loadBuffers(verbs[0], 'verbBuffers')
@@ -43,23 +67,9 @@ const Controller = () => {
     return (() => {
       
     })
-  }, [kits, currentKit, verbs]);
+  }, [verbs]);
 
-  // useEffect(() => {
-  //   console.log('kitBuffers', kitBuffers)
-  //   return (() => {
-      
-  //   })
-  // }, [kitBuffers]);
-  // useEffect(() => {
-  //   if (verbs) {
-  //     console.log('verbs', verbs)
-  //     loadBuffers(verbs[currentVerb], 'verbBuffers')
-  //   } 
-  //   return (() => {
-      
-  //   })
-  // }, [verbs, currentVerb]);
+
   return (
     <div className={classes.controller}>
       <div className={classes.toppanel}>
@@ -67,23 +77,25 @@ const Controller = () => {
                   <Select
                     options={kits}
                     onValueChange={ value => setCurrentKit(value) }
+                    initialValue={currentKit}
                   />
                   <Label>Current kit</Label>
                 </Control> : null }
       <Control>
-        <InputRange id='tempo' min={0} max={100} step={1} onChange={e => setTempo(e.target.value)} value={+tempo}></InputRange>
+        <InputRange id='tempo' min={30} max={160} step={1} onChange={e => setTempo(e.target.value)} value={+tempo}></InputRange>
         <Label>Tempo</Label>
-        <CurrentValue>{Math.round(tempo/10).toString()}</CurrentValue>
+        <CurrentValue>{tempo+ ' bpm'}</CurrentValue>
       </Control>
       <Control>
         <InputRange id='swing' min={0} max={100} step={1} onChange={e => setSwing(e.target.value)} value={+swing}></InputRange>
         <Label>Swing</Label>
-        <CurrentValue>{Math.round(swing/10).toString()}</CurrentValue>
+        <CurrentValue>{swing +'%'}</CurrentValue>
       </Control>
       <Control>
         <Select
           options={numBarsOptions}
           onValueChange={ value => setNumBars(value) }
+          initialValue={numBars}
         />
         <Label>Number of bars</Label>
       </Control>
@@ -91,6 +103,7 @@ const Controller = () => {
         <Select
           options={numBeatsOptions}
           onValueChange={ value => setNumBeats(value) }
+          initialValue={numBeats}
         />
         <Label>Number of beats</Label>
       </Control>
@@ -98,6 +111,7 @@ const Controller = () => {
         <Select
           options={numStepsOptions}
           onValueChange={ value => setNumSteps(value) }
+          initialValue={numSteps}
         />
         <Label>Number of steps</Label>
       </Control>
