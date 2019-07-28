@@ -70,19 +70,19 @@ const useDrumr = () => {
   }
 
   const loadBuffers = async (obj, type) => {
-    setState(state => ({ ...state, isLoading: true }));
+    setState(state => ({ ...state, isLoading: true }))
     const directory = obj.directory,
-    voices = obj.voices;
-    console.log('loadBuffers voices', voices)
-    let buffers = [],
-    buffersToLoad = voices.length;
+    voices = obj.voices
+    let buffersToLoad = voices.length,
+    buffers = [] 
+    console.log('loadBuffers voices', voices.length) 
     for (let i = 0;i<voices.length;i++){
-      buffers[i] = { label:voices[i].label, buffer:{}, value: voices[i].value };
+      buffers[i] = { label:voices[i].label, buffer:{}, value: voices[i].value }
       loadBuffer(CTX, 'assets/audio/'+ directory + voices[i].smple, (buffer) => {
           //console.log(buffer);
-          buffers[i].buffer = buffer;
-          buffersToLoad --;
-          console.log('samplesToLoad', buffersToLoad);
+          buffers[i].buffer = buffer
+          buffersToLoad --
+          console.log('samplesToLoad', buffersToLoad)
           if (buffersToLoad < 1) {
             setState(state => ({ 
               ...state, 

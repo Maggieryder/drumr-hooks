@@ -36,10 +36,10 @@ const Controller = () => {
       console.log('kits', kits)
       loadBuffers(kits[currentKit], 'kitBuffers')
     }  
-    // if (verbs) {
-    //   console.log('verbs', verbs)
-    //   loadBuffers(verbs[0], 'verbBuffers')
-    // } 
+    if (verbs) {
+      console.log('verbs', verbs)
+      loadBuffers(verbs[0], 'verbBuffers')
+    } 
     return (() => {
       
     })

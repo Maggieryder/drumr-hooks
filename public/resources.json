@@ -32,187 +32,187 @@
         {
           "label":"Block Inside",
           "value":"0",
-          "smpl":"BlockInside.wav"
+          "smple":"BlockInside.wav"
         }, 
         {
           "label":"Cement Blocks 1",
           "value":"1",
-          "smpl":"CementBlocks-1.wav"
+          "smple":"CementBlocks-1.wav"
         },
         {
           "label":"Cement Blocks 2",
           "value":"2",
-          "smpl":"CementBlocks-2.wav"
+          "smple":"CementBlocks-2.wav"
         },
         {
           "label":"Chateau de Logne Outside",
           "value":"3",
-          "smpl":"Chateau-de-Logne-Outside.wav"
+          "smple":"Chateau-de-Logne-Outside.wav"
         },
         {
           "label":"Conic Long Echo Hall",
           "value":"4",
-          "smpl":"ConicLongEchoHall.wav"
+          "smple":"ConicLongEchoHall.wav"
         },
         {
           "label":"Large Long Echo Hall",
           "value":"5",
-          "smpl":"LargeLongEchoHall.wav"
+          "smple":"LargeLongEchoHall.wav"
         },
         {
           "label":"Large Wide Echo Hall",
           "value":"6",
-          "smpl":"LargeWideEchoHall.wav"
+          "smple":"LargeWideEchoHall.wav"
         },
         {
           "label":"Greek 7 Echo Hall",
           "value":"7",
-          "smpl":"Greek-7-EchoHall.wav"
+          "smple":"Greek-7-EchoHall.wav"
         },
         {
           "label":"Bottle Hall",
           "value":"8",
-          "smpl":"BottleHall.wav"
+          "smple":"BottleHall.wav"
         },
         {
           "label":"Large Bottle Hall",
           "value":"9",
-          "smpl":"LargeBottleHall.wav"
+          "smple":"LargeBottleHall.wav"
         },
         {
           "label":"Scala Milan Opera Hall",
           "value":"10",
-          "smpl":"ScalaMilanOperaHall.wav"
+          "smple":"ScalaMilanOperaHall.wav"
         },
         {
           "label":"Deep Space",
           "value":"11",
-          "smpl":"DeepSpace.wav"
+          "smple":"DeepSpace.wav"
         },
         {
           "label":"On a Star",
           "value":"12",
-          "smpl":"On-a-Star.wav"
+          "smple":"On-a-Star.wav"
         },
         {
           "label":"Derlon Sanctuary",
           "value":"13",
-          "smpl":"DerlonSanctuary.wav"
+          "smple":"DerlonSanctuary.wav"
         },
         {
           "label":"Direct Cabinet N1",
           "value":"14",
-          "smpl":"DirectCabinetN1.wav"
+          "smple":"DirectCabinetN1.wav"
         },
         {
           "label":"Direct Cabinet N2",
           "value":"15",
-          "smpl":"DirectCabinetN2.wav"
+          "smple":"DirectCabinetN2.wav"
         },
         {
           "label":"Direct Cabinet N3",
           "value":"16",
-          "smpl":"DirectCabinetN3.wav"
+          "smple":"DirectCabinetN3.wav"
         },
         {
           "label":"Direct Cabinet N4",
           "value":"17",
-          "smpl":"DirectCabinetN4.wav"
+          "smple":"DirectCabinetN4.wav"
         },
         {
           "label":"Five Columns",
           "value":"18",
-          "smpl":"FiveColumns.wav"
+          "smple":"FiveColumns.wav"
         },
         {
           "label":"Five Columns Long",
           "value":"19",
-          "smpl":"FiveColumnsLong.wav"
+          "smple":"FiveColumnsLong.wav"
         },
         {
           "label":"French 18th Century Salon",
           "value":"20",
-          "smpl":"French18thCenturySalon.wav"
+          "smple":"French18thCenturySalon.wav"
         },
         {
           "label":"Going Home",
           "value":"21",
-          "smpl":"GoingHome.wav"
+          "smple":"GoingHome.wav"
         },
         {
           "label":"Highly Damped Large Room",
           "value":"22",
-          "smpl":"HighlyDampedLargeRoom.wav"
+          "smple":"HighlyDampedLargeRoom.wav"
         },
         {
           "label":"Small Drum Room",
           "value":"23",
-          "smpl":"SmallDrumRoom.wav"
+          "smple":"SmallDrumRoom.wav"
         },
         {
           "label":"Nice Drum Room",
           "value":"24",
-          "smpl":"NiceDrumRoom.wav"
+          "smple":"NiceDrumRoom.wav"
         },
         {
           "label":"RubyRoom",
           "value":"25",
-          "smpl":"RubyRoom.wav"
+          "smple":"RubyRoom.wav"
         },
         {
           "label":"Trig Room",
           "value":"26",
-          "smpl":"TrigRoom.wav"
+          "smple":"TrigRoom.wav"
         },
         {
           "label":"Vocal Duo",
           "value":"27",
-          "smpl":"VocalDuo.wav"
+          "smple":"VocalDuo.wav"
         },
         {
           "label":"Masonic Lodge",
           "value":"28",
-          "smpl":"MasonicLodge.wav"
+          "smple":"MasonicLodge.wav"
         },
         {
           "label":"Musik vereinsaal",
           "value":"29",
-          "smpl":"Musikvereinsaal.wav"
+          "smple":"Musikvereinsaal.wav"
         },
         {
           "label":"Parking Garage",
           "value":"30",
-          "smpl":"ParkingGarage.wav"
+          "smple":"ParkingGarage.wav"
         },
         {
           "label":"Rays",
           "value":"31",
-          "smpl":"Rays.wav"
+          "smple":"Rays.wav"
         },
         {
           "label":"Right Glass Triangle",
           "value":"32",
-          "smpl":"RightGlassTriangle.wav"
+          "smple":"RightGlassTriangle.wav"
         },
         {
           "label":"Small Prehistoric Cave",
           "value":"33",
-          "smpl":"SmallPrehistoricCave.wav"
+          "smple":"SmallPrehistoricCave.wav"
         },
         {
           "label":"St Nicolaes Church",
           "value":"34",
-          "smpl":"StNicolaesChurch.wav"
+          "smple":"StNicolaesChurch.wav"
         },
         {
           "label":"The Silo",
           "value":"35",
-          "smpl":"TheSilo.wav"
+          "smple":"TheSilo.wav"
         },
         {
           "label":"TheSilo Revised",
           "value":"36",
-          "smpl":"TheSilo-Revised.wav"
+          "smple":"TheSilo-Revised.wav"
         }
       ]
     }
