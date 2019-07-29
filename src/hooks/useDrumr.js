@@ -1,7 +1,16 @@
 import axios from 'axios'
 import { useContext } from 'react'
 import { DrumrContext } from '../context/DrumrContext'
-import { initAudioCtx } from '../api/AudioCtx'
+
+// import { initAudioCtx } from '../api/AudioCtx'
+import { Sample, PannerNode, connectGain, trigger } from '../api/Sample'
+
+import Reverb from '../api/Reverb'
+import Delay from '../api/Delay'
+import Mixer from '../api/Mixer'
+
+
+
 import SQR from '../api/Sequencer'
 
 import $ from "jquery";
@@ -31,7 +40,11 @@ const useDrumr = () => {
     tracks
      } = state
 
-  const loadData = async (url) => {
+
+  const mixer = new Mixer(context)
+
+
+  const loadData = async (url) => {  
     setState(state => ({ ...state, isLoading: true }));
     try {
       const response = await axios.get(`./${url}.json`)
@@ -100,6 +113,14 @@ const useDrumr = () => {
 
   }
 
+  const setContext = (ctx) => {
+    console.log('setContext', ctx)
+    setState(state => ({ 
+      ...state, 
+      context: ctx 
+    }));
+  }
+
   const setCurrentKit = index => {
     console.log('setCurrentKit', index)
     setState(state => ({ 
@@ -119,6 +140,7 @@ const useDrumr = () => {
   const onNoteTap = (trackId, barId, stepId) => {
     // e.preventDefault();
     console.log('trackIndex', trackId, 'bar', barId, 'step', stepId);
+    triggerSample(kitBuffers[trackId].buffer, 0)
     // console.log('Sequencer.running', Sequencer.running());
     // if (!Sequencer.running()){
     //   // MIXER.tracks[trackIndex].triggerSample(CTX.currentTime);
@@ -166,9 +188,15 @@ const useDrumr = () => {
     }));
   }
 
-  
-
-  
+  const triggerSample = (buffer, time) => {
+    const sample = new Sample( context, buffer ),
+    pannedSample = new PannerNode( context, sample)
+    console.log('mixer.masterMix',mixer.delay())
+    // connectGain(context, pannedSample, mixer.reverb())
+    // connectGain(context, pannedSample, mixer.delay())
+    connectGain(context, pannedSample, mixer.masterMix())
+    trigger(sample, time);
+  }
 
   // function playTrack(index) {
   //   if (index === state.currentTrackIndex) {

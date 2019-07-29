@@ -1,12 +1,9 @@
 import React, { useState } from 'react'
 
-import Sample from '../api/Sample'
-
 const initialState = {
   trackId: null,
   context: null,
   voiceId: 0,
-  sample: Sample, 
   gain: 0,
   pan: 0,
   reverbSend: 0,

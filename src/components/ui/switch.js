@@ -3,7 +3,7 @@ import React from 'react'
 import classes from './ui.module.scss'
 
 const Switch = ({ isOn, onClick, activeClass }) => {
-    console.log('[ switch ] isOn', isOn)
+    // console.log('[ switch ] isOn', isOn)
 
     return (
         <div className={classes.switch} onClick={onClick}>

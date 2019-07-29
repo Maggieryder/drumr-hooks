@@ -15,7 +15,6 @@ const Bars = ( { trackId } ) => {
   useEffect(() => {
     setBars(Array.apply(null, {length: numBars}).map(Number.call, Number))
     console.log('[ Bars ] trackId, bars', trackId, bars)
-    console.log('[ Bars ] context', context)
     return (() => {
       
     })

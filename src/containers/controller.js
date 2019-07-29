@@ -7,6 +7,8 @@ import Tracks from '../components/tracks'
 import Control from '../components/control'
 import Processors from '../components/processors'
 
+import { initAudioCtx } from '../api/AudioCtx'
+
 import useDrumr from '../hooks/useDrumr'
 
 import classes from './controller.module.scss'
@@ -14,6 +16,7 @@ import classes from './controller.module.scss'
 const Controller = () => {
   const { isLoading, 
           loadData, 
+          context, 
           loadBuffers, 
           kits, 
           currentKit, 

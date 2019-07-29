@@ -14,7 +14,7 @@ const Bar = ( { trackId, barId } ) => {
   const [steps, setSteps] = useState([])
 
   useEffect(() => {
-    console.log('numBeats', numBeats)
+    // console.log('numSteps', numSteps)
     setSteps(Array.apply(null, {length: numSteps}).map(Number.call, Number))
     return (() => {
       
