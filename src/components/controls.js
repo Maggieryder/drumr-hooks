@@ -58,7 +58,6 @@ const Controls = ( { trackId } ) => {
         <Select
           options={ kitBuffers }
           onValueChange={value => setVoiceId({ trackId, value })}
-          initialValue={voiceId}
           />
       </Control> 
       <Control>

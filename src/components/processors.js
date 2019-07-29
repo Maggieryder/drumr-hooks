@@ -75,7 +75,7 @@ const Processors = ({reverbs}) => {
           <Switch isOn={reverbOn} onClick={ () => setReverbOn(!reverbOn)} activeClass='rgb(21, 255, 0)' />
         </Control>
         <Control>  
-          <Select options={verbBuffers} onValueChange={value => setReverbId(value)} initialValue={reverbId} />
+          <Select options={verbBuffers} onValueChange={value => setReverbId(value)} initialValue={reverbId.toString()} />
         </Control>
       </Processor>
 

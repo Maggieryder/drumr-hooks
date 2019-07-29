@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
+
+import { initAudioCtx } from '../api/AudioCtx'
 
 const initialState = {
+  context: initAudioCtx(),
   isLoading: false,
   error: null,
   kits: null,

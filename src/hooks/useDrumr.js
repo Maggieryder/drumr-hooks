@@ -6,14 +6,15 @@ import SQR from '../api/Sequencer'
 
 import $ from "jquery";
 
-const CTX = initAudioCtx()
-const Sequencer = new SQR(CTX);
+// const CTX = initAudioCtx()
+// const Sequencer = new SQR(CTX);
 
 const useDrumr = () => {
   const [state, setState] = useContext(DrumrContext);
 
   const { isLoading,
     error,
+    context,
     kits,
     verbs,
     kitBuffers,
@@ -55,7 +56,7 @@ const useDrumr = () => {
     sound.buffer = buffer;
   }
 
-  const loadBuffer = async (context, url, callback) => {
+  const loadBuffer = async (url, callback) => {
     const request = new XMLHttpRequest();
       //header('Access-Control-Allow-Origin: *');
       request.open('get', url, true);
@@ -78,7 +79,7 @@ const useDrumr = () => {
     console.log('loadBuffers voices', voices.length) 
     for (let i = 0;i<voices.length;i++){
       buffers[i] = { label:voices[i].label, buffer:{}, value: voices[i].value }
-      loadBuffer(CTX, 'assets/audio/'+ directory + voices[i].smple, (buffer) => {
+      loadBuffer('assets/audio/'+ directory + voices[i].smple, (buffer) => {
           //console.log(buffer);
           buffers[i].buffer = buffer
           buffersToLoad --
@@ -119,10 +120,10 @@ const useDrumr = () => {
     // e.preventDefault();
     console.log('trackIndex', trackId, 'bar', barId, 'step', stepId);
     // console.log('Sequencer.running', Sequencer.running());
-    if (!Sequencer.running()){
-      // MIXER.tracks[trackIndex].triggerSample(CTX.currentTime);
-      // Sequencer.sequenceNote(trackId, barId, stepId);
-    }  
+    // if (!Sequencer.running()){
+    //   // MIXER.tracks[trackIndex].triggerSample(CTX.currentTime);
+    //   // Sequencer.sequenceNote(trackId, barId, stepId);
+    // }  
   }
 
   const setTempo = value => {
@@ -164,6 +165,8 @@ const useDrumr = () => {
       numSteps: value 
     }));
   }
+
+  
 
   
 
@@ -210,6 +213,7 @@ const useDrumr = () => {
     setCurrentKit,
     isLoading,
     error,
+    context,
     kits,
     verbs,
     kitBuffers,

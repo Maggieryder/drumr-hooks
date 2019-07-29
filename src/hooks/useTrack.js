@@ -1,5 +1,7 @@
 import { useContext } from 'react'
 
+import Sample from '../api/Sample'
+
 import { TrackContext } from '../context/TrackContext'
 
 const useTrack = () => {
@@ -7,7 +9,9 @@ const useTrack = () => {
 
   const { 
     trackId,
+    context, 
     voiceId,
+    sample,
     gain,
     pan,
     reverbSend,
@@ -16,6 +20,8 @@ const useTrack = () => {
     mute,
     sequence
      } = state
+
+  
 
   // const setSound = ({ buffers }, { name, buffer }) => {
   //   const sound = buffers.find((s) => s.name === name);
@@ -93,11 +99,26 @@ const useTrack = () => {
     }));
   }
 
+  const setSample = (buffer) => {
+    setState(state => ({ 
+      ...state, 
+      sample: new Sample(context, buffer, pan.node(), gain, reverbSend, delaySend)
+    }));
+  }
+
+  const triggerSample = (time) => {
+    sample.trigger(time);
+  }
+
 
 
   return {
     trackId,
+    context,
     voiceId,
+    sample,
+    setSample, 
+    triggerSample,
     gain,
     pan,
     reverbSend,

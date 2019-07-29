@@ -77,7 +77,7 @@ const Controller = () => {
                   <Select
                     options={kits}
                     onValueChange={ value => setCurrentKit(value) }
-                    initialValue={currentKit}
+                    initialValue={currentKit.toString()}
                   />
                   <Label>Current kit</Label>
                 </Control> : null }
@@ -95,7 +95,7 @@ const Controller = () => {
         <Select
           options={numBarsOptions}
           onValueChange={ value => setNumBars(value) }
-          initialValue={numBars}
+          initialValue={numBars.toString()}
         />
         <Label>Number of bars</Label>
       </Control>
@@ -103,7 +103,7 @@ const Controller = () => {
         <Select
           options={numBeatsOptions}
           onValueChange={ value => setNumBeats(value) }
-          initialValue={numBeats}
+          initialValue={numBeats.toString()}
         />
         <Label>Number of beats</Label>
       </Control>
@@ -111,7 +111,7 @@ const Controller = () => {
         <Select
           options={numStepsOptions}
           onValueChange={ value => setNumSteps(value) }
-          initialValue={numSteps}
+          initialValue={numSteps.toString()}
         />
         <Label>Number of steps</Label>
       </Control>
