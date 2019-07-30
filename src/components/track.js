@@ -23,7 +23,7 @@ const Track = ( { trackId } ) => {
           <Bars trackId={trackId}/>
         </div>
         <div className={classes['controls-mask']}>
-          <Controls trackId={trackId}/>  
+          <Controls trackId={trackId} />  
         </div>
       </div>
     </TrackProvider>

@@ -1,10 +1,11 @@
 import Reverb from '../api/Reverb'
 import Delay from '../api/Delay'
+import Track from '../api/Track'
 
 class Mixer {
   constructor(context){
     this._context = context
-    this._tracks =[]
+    this._tracks = []
     this._soloTracks = []
     this._mutedTracks = []
     this.init()
@@ -16,6 +17,7 @@ class Mixer {
     this._masterMix = this._context.createGain()
     this._reverb = new Reverb(this._context, this._wetMix)
     this._delay = new Delay(this._context, this._wetMix)
+    // console.log('this._reverb', this.reverb())
     //this._compressor = new Compressor(this._context, this._masterMix)
     this._wetMute = false
     this._dryMute = false
@@ -65,14 +67,22 @@ class Mixer {
     return this._masterMix
   }
   reverb(){
-    return this._reverb.node
+    return this._reverb.node()
   }
   delay(){
-    return this._delay.node
+    return this._delay.node()
   }
   compressor(){
-    return this._compressor.node
+    return this._compressor.node()
   }
+  reverbBuffer(buffer){
+    this._reverb.setImpulse(buffer)
+  }
+  // addTrack(){
+  //   const id = this._tracks.length
+  //   const track = new Track(id, this._context, this._masterMix, this.reverb(), this.delay())
+  //   this._tracks = [...this._tracks, track]
+  // }
 }
 
 export default Mixer

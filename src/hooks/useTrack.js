@@ -2,6 +2,9 @@ import { useContext } from 'react'
 
 import { TrackContext } from '../context/TrackContext'
 
+// import Track from '../api/Track'
+
+
 const useTrack = () => {
   const [state, setState] = useContext(TrackContext);
 
@@ -9,7 +12,6 @@ const useTrack = () => {
     trackId,
     context, 
     voiceId,
-    sample,
     gain,
     pan,
     reverbSend,
@@ -19,7 +21,7 @@ const useTrack = () => {
     sequence
      } = state
 
-  
+  // const track = new Track(trackId, context)
 
   // const setSound = ({ buffers }, { name, buffer }) => {
   //   const sound = buffers.find((s) => s.name === name);
@@ -43,6 +45,7 @@ const useTrack = () => {
 
   const setGain = ({ trackId, value }) => {
     console.log('[useTrack] setGain', { trackId, value })
+    // track.updateVolume(value)
     setState(state => ({ 
       ...state, 
       gain: value 
@@ -51,6 +54,7 @@ const useTrack = () => {
 
   const setPan = ({ trackId, value }) => {
     console.log('[useTrack] setPan', { trackId, value })
+    // track.updatePan(value)
     setState(state => ({ 
       ...state, 
       pan: value 
@@ -59,6 +63,7 @@ const useTrack = () => {
 
   const setReverbSend = ({ trackId, value }) => {
     console.log('[useTrack] setReverbSend', { trackId, value })
+    // track.updateReverbSend(value)
     setState(state => ({ 
       ...state, 
       reverbSend: value 
@@ -67,6 +72,7 @@ const useTrack = () => {
 
   const setDelaySend = ({ trackId, value }) => {
     console.log('[useTrack] setDelaySend', { trackId, value })
+    // track.updateDelaySend(value)
     setState(state => ({ 
       ...state, 
       delaySend: value 
@@ -96,6 +102,7 @@ const useTrack = () => {
       sequence: value 
     }));
   }
+
 
   
 

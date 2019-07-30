@@ -16,7 +16,7 @@ import useDrumr from '../hooks/useDrumr'
 
 const Processors = ({reverbs}) => {
 
-  const { verbBuffers } = useDrumr();
+  const { verbBuffers, assignReverbBuffer } = useDrumr();
 
   // reverb processing
   const [reverbId, setReverbId] = useState(0)
@@ -46,6 +46,7 @@ const Processors = ({reverbs}) => {
   useEffect(() => {
     console.log('[Processors] reverb', reverbId, reverbOn)
     // update reverb
+    assignReverbBuffer(verbBuffers[reverbId].smple)
     return (() => {
       
     })

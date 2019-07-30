@@ -14,7 +14,7 @@ import classes from './controls.module.scss'
 
 const Controls = ( { trackId } ) => {
 
-  const { kitBuffers } = useDrumr();
+  const { kitBuffers } = useDrumr()
 
   const { 
     voiceId, setVoiceId,

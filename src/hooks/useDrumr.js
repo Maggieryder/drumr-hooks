@@ -5,9 +5,15 @@ import { DrumrContext } from '../context/DrumrContext'
 // import { initAudioCtx } from '../api/AudioCtx'
 import { Sample, PannerNode, connectGain, trigger } from '../api/Sample'
 
+
+
+
 import Reverb from '../api/Reverb'
 import Delay from '../api/Delay'
 import Mixer from '../api/Mixer'
+import Track from '../api/Track'
+
+
 
 
 
@@ -64,11 +70,6 @@ const useDrumr = () => {
     }
   }
 
-  const setSound = ({ sounds }, { name, buffer }) => {
-    const sound = sounds.find((s) => s.name === name);
-    sound.buffer = buffer;
-  }
-
   const loadBuffer = async (url, callback) => {
     const request = new XMLHttpRequest();
       //header('Access-Control-Allow-Origin: *');
@@ -109,8 +110,8 @@ const useDrumr = () => {
     }
   }
 
-  const assignBuffer = (buffer) => {
-
+  const assignReverbBuffer = (buffer) => {
+    mixer.reverbBuffer(buffer)
   }
 
   const setContext = (ctx) => {
@@ -177,7 +178,7 @@ const useDrumr = () => {
     setState(state => ({ 
       ...state, 
       numBeats: value 
-    }));
+    }))
   }
 
   const setNumSteps = value => {
@@ -185,15 +186,39 @@ const useDrumr = () => {
     setState(state => ({ 
       ...state, 
       numSteps: value 
-    }));
+    }))
+  }
+
+  // const setMixer = () => {
+  //   console.log('setMixer', state.context)
+  //   setState(state => ({ 
+  //     ...state, 
+  //     mixer: new Mixer(state.context) 
+  //   }))
+  // }
+  const setTracks = () => {
+    [0,1,2,3].map(i => {
+      addTrack(i)
+    })
+    console.log(' - - - TRACKS', tracks)
+  }
+
+  const addTrack = (id) => {
+    const track = new Track(id, context, mixer.masterMix(), mixer.reverb(), mixer.delay())
+    console.log('addTrack', track)
+    setState(state => ({ 
+      ...state, 
+      tracks: [...tracks, track] 
+    }))
+    console.log('TRACKS', tracks)
   }
 
   const triggerSample = (buffer, time) => {
     const sample = new Sample( context, buffer ),
     pannedSample = new PannerNode( context, sample)
-    console.log('mixer.masterMix',mixer.delay())
-    // connectGain(context, pannedSample, mixer.reverb())
-    // connectGain(context, pannedSample, mixer.delay())
+    console.log('mixer.masterMix',mixer.reverb())
+    connectGain(context, pannedSample, mixer.reverb())
+    connectGain(context, pannedSample, mixer.delay())
     connectGain(context, pannedSample, mixer.masterMix())
     trigger(sample, time);
   }
@@ -248,6 +273,7 @@ const useDrumr = () => {
     verbBuffers,
     currentKit,
     currentVerb,
+    assignReverbBuffer,
     onNoteTap,
     signature,
     tempo, 
@@ -256,7 +282,8 @@ const useDrumr = () => {
     numSteps,
     numBeats,
     sequences,
-    tracks, 
+    tracks,
+    setTracks,
     setTempo,
     setSwing,
     setNumBars,

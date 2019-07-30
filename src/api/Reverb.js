@@ -3,11 +3,14 @@ import Processor from './Processor'
 class Reverb extends Processor {
   constructor(context, destination){
     super(context, destination)
-    this._convolver = context.createConvolver()
-    this._convolverGain = context.createGain()
     this.init()
   }
   init(){
+    this._convolver = this._context.createConvolver()
+    this._convolverGain = this._context.createGain()
+    this._convolverGain.gain.value = 0
+    this._convolver.loop = true
+    this._convolver.normalize = true
     this.connect()
   }
   loadImpulse(url){
@@ -28,11 +31,6 @@ class Reverb extends Processor {
   setImpulse(buffer){
     this._convolver.buffer = buffer;
     this._convolverGain.gain.value = .7
-  }
-  init() {
-    this._convolverGain.gain.value = 0
-    this._convolver.loop = true
-    this._convolver.normalize = true
   }
   connect() {
     this._convolverGain.connect(this._convolver)

@@ -18,6 +18,7 @@ const initialState = {
   numBars: 1,
   numBeats: 4,
   numSteps: 16,
+  mixer: null,
   sequences: [], 
   tracks: []
 };

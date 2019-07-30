@@ -31,7 +31,8 @@ const Controller = () => {
           numBeats, 
           setNumBeats, 
           numSteps, 
-          setNumSteps } = useDrumr();
+          setNumSteps,
+          setTracks } = useDrumr()
 
   const numBarsOptions = [
     {label:'1', value:1},
@@ -48,6 +49,7 @@ const Controller = () => {
   ]
   useEffect(() => {
     loadData('./resources')
+    setTracks()
     return (() => {
       
     })
