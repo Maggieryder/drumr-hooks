@@ -7,10 +7,10 @@ import { TrackProvider } from "../context/TrackContext";
 
 import classes from './track.module.scss'
 
-const Track = ( { trackId } ) => {
+const Track = ( { track } ) => {
 
   useEffect(() => {
-    console.log('[ Tracks ] trackId', trackId)
+    // console.log('[ Tracks ] trackId', trackId)
     return (() => {
       
     })
@@ -20,10 +20,10 @@ const Track = ( { trackId } ) => {
     <TrackProvider>
       <div className={classes.track}>
         <div className={classes['bars-mask']}>
-          <Bars trackId={trackId}/>
+          <Bars track={track}/>
         </div>
         <div className={classes['controls-mask']}>
-          <Controls trackId={trackId} />  
+          <Controls track={track} />  
         </div>
       </div>
     </TrackProvider>
@@ -31,7 +31,7 @@ const Track = ( { trackId } ) => {
 }
 
 Track.propTypes = {
-  trackId: PropTypes.number.isRequired
+  track: PropTypes.object.isRequired
 }
 
 export default Track

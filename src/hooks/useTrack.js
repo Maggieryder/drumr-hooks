@@ -1,12 +1,18 @@
 import { useContext } from 'react'
 
+import { DrumrContext } from '../context/DrumrContext'
 import { TrackContext } from '../context/TrackContext'
 
-// import Track from '../api/Track'
+import useDrumr from '../hooks/useDrumr'
+
+import Track from '../api/Track'
 
 
 const useTrack = () => {
-  const [state, setState] = useContext(TrackContext);
+
+  const { tracks, kitBuffers } = useDrumr(DrumrContext)
+
+  const [state, setState] = useContext(TrackContext)
 
   const { 
     trackId,
@@ -21,19 +27,14 @@ const useTrack = () => {
     sequence
      } = state
 
-  // const track = new Track(trackId, context)
 
-  // const setSound = ({ buffers }, { name, buffer }) => {
-  //   const sound = buffers.find((s) => s.name === name);
-  //   sound.buffer = buffer;
+  // const setTrackId = ({ trackId, value }) => {
+  //   console.log('[useTrack] setVoiceId', { trackId, value })
+  //   setState(state => ({ 
+  //     ...state, 
+  //     trackId: value 
+  //   }));
   // }
-  const setTrackId = ({ trackId, value }) => {
-    console.log('[useTrack] setVoiceId', { trackId, value })
-    setState(state => ({ 
-      ...state, 
-      trackId: value 
-    }));
-  }
 
   const setVoiceId = ({ trackId, value }) => {
     console.log('[useTrack] setVoiceId', { trackId, value })
@@ -45,7 +46,7 @@ const useTrack = () => {
 
   const setGain = ({ trackId, value }) => {
     console.log('[useTrack] setGain', { trackId, value })
-    // track.updateVolume(value)
+    tracks[trackId].updateVolume(value)
     setState(state => ({ 
       ...state, 
       gain: value 
@@ -81,6 +82,7 @@ const useTrack = () => {
 
   const setSolo = ({ trackId, value }) => {
     console.log('[useTrack] setSolo', { trackId, value })
+    
     setState(state => ({ 
       ...state, 
       solo: value 
@@ -89,6 +91,7 @@ const useTrack = () => {
 
   const setMute = ({ trackId, value }) => {
     console.log('[useTrack] setMute', { trackId, value })
+    tracks[trackId].toggleMute()
     setState(state => ({ 
       ...state, 
       mute: value 
@@ -102,11 +105,6 @@ const useTrack = () => {
       sequence: value 
     }));
   }
-
-
-  
-
-
 
   return {
     trackId,

@@ -12,7 +12,7 @@ import useTrack from '../hooks/useTrack'
 
 import classes from './controls.module.scss'
 
-const Controls = ( { trackId } ) => {
+const Controls = ( { track } ) => {
 
   const { kitBuffers } = useDrumr()
 
@@ -27,19 +27,19 @@ const Controls = ( { trackId } ) => {
   } = useTrack();
 
   useEffect(() => {
-      if (kitBuffers) {
-        console.log('[ Controls ] kitBuffers', kitBuffers)
-      }  
-      return (() => {
-        
-      })
-    }, [kitBuffers]);
+    if (kitBuffers) {
+      // console.log('[ Controls ] kitBuffers', kitBuffers)
+    }  
+    return (() => {
+      
+    })
+  }, [kitBuffers]);
 
   useEffect(() => {
-    // console.log('[Controls] voiceId', voiceId)
+    console.log('[Controls] id voiceId', track.id(), voiceId)
     // console.log('[Controls] reverbSend', reverbSend)
     // console.log('[Controls] delaySend', delaySend)
-    // console.log('[Controls] gain', gain)
+    console.log('[Controls] id gain', track.id(), gain)
     // console.log('[Controls] pan', pan)
     // console.log('[Controls] mute', mute)
     // console.log('[Controls] solo', solo)
@@ -48,44 +48,40 @@ const Controls = ( { trackId } ) => {
     })
   }, [voiceId, reverbSend, delaySend, gain, pan, mute, solo]);
 
-  const style = {
-    // 
-  }
-
   return (
     <div className={classes.controls}> 
       <Control>
         <Select
           options={ kitBuffers }
-          onValueChange={value => setVoiceId({ trackId, value })}
+          onValueChange={value => setVoiceId({ trackId: track.id(), value })}
           />
       </Control> 
       <Control>
-        <InputRange id='reverb' min={0} max={100} step={1} onChange={e => setReverbSend({ trackId, value: e.target.value })} value={+reverbSend}></InputRange>
+        <InputRange id='reverb' min={0} max={100} step={1} onChange={e => setReverbSend({ trackId: track.id(), value: e.target.value })} value={+reverbSend}></InputRange>
         <Label>Reverb</Label>
         <CurrentValue>{Math.round(reverbSend/10).toString()}</CurrentValue>
       </Control>
       <Control>
-        <InputRange id='delay' min={0} max={100} step={1} onChange={e => setDelaySend({ trackId, value: e.target.value })} value={+delaySend}></InputRange>
+        <InputRange id='delay' min={0} max={100} step={1} onChange={e => setDelaySend({ trackId: track.id(), value: e.target.value })} value={+delaySend}></InputRange>
         <Label>Delay</Label>
         <CurrentValue>{Math.round(delaySend/10).toString()}</CurrentValue>
       </Control>
       <Control>
-        <InputRange id='gain' min={0} max={100} step={1} onChange={e => setGain({ trackId, value: e.target.value })} value={+gain}></InputRange>
+        <InputRange id='gain' min={0} max={100} step={1} onChange={e => setGain({ trackId: track.id(), value: e.target.value })} value={+gain}></InputRange>
         <Label>Gain</Label>
         <CurrentValue>{Math.round(gain/10).toString()}</CurrentValue>
       </Control>
       <Control>
-        <InputRange id='pan' min={-50} max={50} step={1} onChange={e => setPan({ trackId, value: e.target.value })} value={+pan}></InputRange>
+        <InputRange id='pan' min={-50} max={50} step={1} onChange={e => setPan({ trackId: track.id(), value: e.target.value })} value={+pan}></InputRange>
         <Label>Pan</Label>
         <CurrentValue>{Math.round(pan/10).toString()}</CurrentValue>
       </Control>
       <Control>
-        <Switch isOn={mute} onClick={() => setMute({ trackId, value: !mute })} activeClass='red' />
+        <Switch isOn={mute} onClick={() => setMute({ trackId: track.id(), value: !mute })} activeClass='red' />
         <Label>Mute</Label>
       </Control>
       <Control>
-        <Switch isOn={solo} onClick={() => setSolo({ trackId, value: !solo })} activeClass='rgb(21, 255, 0)' />
+        <Switch isOn={solo} onClick={() => setSolo({ trackId: track.id(), value: !solo })} activeClass='rgb(21, 255, 0)' />
         <Label>Solo</Label>
       </Control>
     </div>
@@ -93,7 +89,7 @@ const Controls = ( { trackId } ) => {
 }
 
 Controls.propTyes = {
-  // voices: PropTypes.object.isRequired
+  track: PropTypes.object.isRequired
 }
 
 export default Controls

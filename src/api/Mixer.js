@@ -1,6 +1,5 @@
 import Reverb from '../api/Reverb'
 import Delay from '../api/Delay'
-import Track from '../api/Track'
 
 class Mixer {
   constructor(context){
@@ -76,6 +75,7 @@ class Mixer {
     return this._compressor.node()
   }
   reverbBuffer(buffer){
+    console.log('[ mixer] reverbBuffer', buffer)
     this._reverb.setImpulse(buffer)
   }
   // addTrack(){

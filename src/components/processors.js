@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
-import axios from 'axios'
+import React, { useState, useEffect } from 'react'
 import Control from './control'
 import Select from './ui/select'
 import InputRange from './ui/inputRange'
@@ -36,7 +35,7 @@ const Processors = ({reverbs}) => {
 
   useEffect(() => {
     if (verbBuffers) {
-      console.log('[ Processors ] verbBuffers', verbBuffers)
+      // console.log('[ Processors ] verbBuffers', verbBuffers.length)
     }  
     return (() => {
       
@@ -44,13 +43,13 @@ const Processors = ({reverbs}) => {
   }, [verbBuffers]);
 
   useEffect(() => {
-    console.log('[Processors] reverb', reverbId, reverbOn)
+    console.log('[Processors] reverb', reverbId)
     // update reverb
-    assignReverbBuffer(verbBuffers[reverbId].smple)
+    assignReverbBuffer(verbBuffers[reverbId].buffer)
     return (() => {
       
     })
-  }, [reverbId, reverbOn])
+  }, [reverbId])
 
   useEffect(() => {
     console.log('[Processors] delay', delayTime, delayFeedback, delayFrequency, delayOn)

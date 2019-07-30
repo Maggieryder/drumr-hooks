@@ -7,16 +7,13 @@ import Tracks from '../components/tracks'
 import Control from '../components/control'
 import Processors from '../components/processors'
 
-import { initAudioCtx } from '../api/AudioCtx'
-
 import useDrumr from '../hooks/useDrumr'
 
 import classes from './controller.module.scss'
 
 const Controller = () => {
-  const { isLoading, 
+  const { 
           loadData, 
-          context, 
           loadBuffers, 
           kits, 
           currentKit, 
@@ -32,6 +29,7 @@ const Controller = () => {
           setNumBeats, 
           numSteps, 
           setNumSteps,
+          tracks,
           setTracks } = useDrumr()
 
   const numBarsOptions = [
@@ -49,15 +47,17 @@ const Controller = () => {
   ]
   useEffect(() => {
     loadData('./resources')
-    setTracks()
+    
+    
     return (() => {
       
     })
   }, []);
   useEffect(() => {
     if (kits) {
-      console.log('kits', kits, currentKit)
+      // console.log('kits', kits, currentKit)
       loadBuffers(kits[currentKit], 'kitBuffers')
+      if (tracks.length<1) setTracks()
     }  
     return (() => {
       
@@ -66,7 +66,7 @@ const Controller = () => {
 
   useEffect(() => { 
     if (verbs) {
-      console.log('verbs', verbs)
+      console.log('verbs', verbs[0])
       loadBuffers(verbs[0], 'verbBuffers')
     } 
     return (() => {

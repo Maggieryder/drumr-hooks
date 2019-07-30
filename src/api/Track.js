@@ -5,24 +5,22 @@
 
 
 export default class Track {
-  constructor(id, context, destination, reverb, delay){
-    this._id = id
+  constructor(id, context, mixer){
+    this._trackId = id
     this._context = context
-    this._destination = destination
-    this._reverbNode = reverb
-    this._delayNode = delay
+    this._destination = mixer.masterMix()
+    this._reverbNode = mixer.reverb()
+    this._delayNode = mixer.delay()
     // this.store = store;
     // this.store.subscribe(this.updateState.bind(this));
 
     this._outputGain = this._context.createGain()
     this._reverbSendGain = this._context.createGain()
     this._delaySendGain = this._context.createGain()
-    // this._panner = new Panner(this._context, this._id)
-    // this._meter = new AudioProcessor(this._context, this._id)
+    // this._panner = new Panner(this._context, this._trackId)
+    // this._meter = new AudioProcessor(this._context, this._trackId)
     // this._meter.init(this._outputGain, this._destination)
 
-
-    
     // this.sourceNode;
     // this.sample;
     // this.buffer;
@@ -60,7 +58,7 @@ export default class Track {
     
   }
   id(){
-    return this._id;
+    return this._trackId;
   }
 //   assignSample(buffer){
 //     this.buffer = buffer;
@@ -70,6 +68,7 @@ export default class Track {
 //     this.sample.trigger(time);
 //   }
   toggleMute(){ 
+    console.log('toggleMute')
     this._mute = !this._mute
     this._mute ? this.disconnect() : this.connect();
   }
@@ -83,25 +82,25 @@ export default class Track {
     return this._solo;
   }
   updateVolume(value){
-    // console.log('Track '+this.id+' volume', value )
+    console.log('Track '+this.id()+' volume', value )
     this._outputGain.gain.value = value;
   }
   getVolume(){
     return this._outputGain.gain.value;
   }
   updatePan(value){
-    // console.log('Track '+this.id+' volume', value )
+    // console.log('Track '+this.id()+' volume', value )
     // this._outputGain.gain.value = value;
   }
   updateReverbSend(value){
-    // console.log('Track '+this.id+' send ' + index, 'value '+value )
+    // console.log('Track '+this.id()+' send ' + index, 'value '+value )
     this._reverbSendGain.gain.value = value;
   }
   reverbSend(){
     return this._reverbSendGain.gain.value;
   }
   updateDelaySend(value){
-    // console.log('Track '+this.id+' send ' + index, 'value '+value )
+    // console.log('Track '+this.id()+' send ' + index, 'value '+value )
     this._delaySendGain.gain.value = value;
   }
   delaySend(){

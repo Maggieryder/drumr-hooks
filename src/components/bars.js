@@ -6,7 +6,7 @@ import useDrumr from '../hooks/useDrumr'
 
 import classes from './bars.module.scss'
 
-const Bars = ( { trackId } ) => {
+const Bars = ( { track } ) => {
 
   const { numBars } = useDrumr();
 
@@ -14,7 +14,7 @@ const Bars = ( { trackId } ) => {
 
   useEffect(() => {
     setBars(Array.apply(null, {length: numBars}).map(Number.call, Number))
-    console.log('[ Bars ] trackId, bars', trackId, bars)
+    console.log('[ Bars ] track.id, bars', track.id(), bars)
     return (() => {
       
     })
@@ -28,14 +28,14 @@ const Bars = ( { trackId } ) => {
   return (
     <div className={classes.bars} style={style}>
       {bars.map(i => {
-        return <Bar key={i} trackId={trackId} barId={i}/>
+        return <Bar key={i} trackId={track.id()} barId={i}/>
       })}
     </div>
   )
 }
 
 Bars.propTypes = {
-  trackId: PropTypes.number.isRequired,
+  track: PropTypes.object.isRequired,
   numBars: PropTypes.number
 }
 

@@ -105,14 +105,14 @@ class Sequencer {
   }
 
   updateTempo(e){
-    let val = e.target.value,
-    tot = e.target.max - e.target.min,
-    perc = (val-e.target.min)/tot;
+    let val = e.target.value
+    // tot = e.target.max - e.target.min,
+    // perc = (val-e.target.min)/tot;
     // updateInputStyle('tempo', perc*100);
     //sheet.textContent = getTrackStyle('tempo', perc*100);
     this.updateParams({tempo:val});
     // DELAY.updateDelayTime(this.secondsPerBeat()*.5);
-    $('#tempoMeter').html(val+' bpm');
+    // $('#tempoMeter').html(val+' bpm');
   }
 
   togglePlay() {

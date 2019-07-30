@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { useContext } from 'react'
+import { useContext, useReducer } from 'react'
 import { DrumrContext } from '../context/DrumrContext'
 
 // import { initAudioCtx } from '../api/AudioCtx'
@@ -7,22 +7,10 @@ import { Sample, PannerNode, connectGain, trigger } from '../api/Sample'
 
 
 
-
-import Reverb from '../api/Reverb'
-import Delay from '../api/Delay'
 import Mixer from '../api/Mixer'
 import Track from '../api/Track'
+// import SQR from '../api/Sequencer'
 
-
-
-
-
-import SQR from '../api/Sequencer'
-
-import $ from "jquery";
-
-// const CTX = initAudioCtx()
-// const Sequencer = new SQR(CTX);
 
 const useDrumr = () => {
   const [state, setState] = useContext(DrumrContext);
@@ -49,12 +37,40 @@ const useDrumr = () => {
 
   const mixer = new Mixer(context)
 
+  
+
+  // const [tracks, dispatch] = useReducer((tracks, { type, value }) => {
+  //   switch (type) {
+  //     case "addTrack":
+  //       return [...tracks, value];
+  //     case "removeTrack":
+  //       return tracks.filter((_, index) => index !== value);
+  //     default:
+  //       return tracks;
+  //   }
+  // }, []);
+
+  const setTracks = () => {
+    [0,1,2,3].map((item, i)=> addTrack(i))
+    console.log(' - - - TRACKS', tracks)
+  }
+
+  const addTrack = (id) => {
+    const track = new Track(id, context, mixer)
+    // console.log('addTrack', track)
+    setState(state => ({ 
+      ...state, 
+      tracks: [...state.tracks, track] 
+    }))
+    // dispatch({ type:'addTrack', value: track })
+  }
+
 
   const loadData = async (url) => {  
     setState(state => ({ ...state, isLoading: true }));
     try {
       const response = await axios.get(`./${url}.json`)
-      console.log('Success!',response.data.kits);
+      // console.log('Success!',response.data.kits);
       setState({
         ...state,
         kits: response.data.kits,
@@ -90,7 +106,7 @@ const useDrumr = () => {
     voices = obj.voices
     let buffersToLoad = voices.length,
     buffers = [] 
-    console.log('loadBuffers voices', voices.length) 
+    // console.log('loadBuffers voices', voices.length) 
     for (let i = 0;i<voices.length;i++){
       buffers[i] = { label:voices[i].label, buffer:{}, value: voices[i].value }
       loadBuffer('assets/audio/'+ directory + voices[i].smple, (buffer) => {
@@ -114,14 +130,6 @@ const useDrumr = () => {
     mixer.reverbBuffer(buffer)
   }
 
-  const setContext = (ctx) => {
-    console.log('setContext', ctx)
-    setState(state => ({ 
-      ...state, 
-      context: ctx 
-    }));
-  }
-
   const setCurrentKit = index => {
     console.log('setCurrentKit', index)
     setState(state => ({ 
@@ -141,12 +149,24 @@ const useDrumr = () => {
   const onNoteTap = (trackId, barId, stepId) => {
     // e.preventDefault();
     console.log('trackIndex', trackId, 'bar', barId, 'step', stepId);
+    const track = tracks[trackId]
+    console.log('track', track)
+    const voiceId = track.voiceId
     triggerSample(kitBuffers[trackId].buffer, 0)
     // console.log('Sequencer.running', Sequencer.running());
     // if (!Sequencer.running()){
     //   // MIXER.tracks[trackIndex].triggerSample(CTX.currentTime);
     //   // Sequencer.sequenceNote(trackId, barId, stepId);
     // }  
+  }
+  const triggerSample = (buffer, time) => {
+    const sample = new Sample( context, buffer ),
+    pannedSample = new PannerNode( context, sample)
+    console.log('mixer.masterMix',mixer.reverb())
+    connectGain(context, pannedSample, mixer.reverb())
+    connectGain(context, pannedSample, mixer.delay())
+    connectGain(context, pannedSample, mixer.masterMix())
+    trigger(sample, time);
   }
 
   const setTempo = value => {
@@ -196,32 +216,11 @@ const useDrumr = () => {
   //     mixer: new Mixer(state.context) 
   //   }))
   // }
-  const setTracks = () => {
-    [0,1,2,3].map(i => {
-      addTrack(i)
-    })
-    console.log(' - - - TRACKS', tracks)
-  }
+  
 
-  const addTrack = (id) => {
-    const track = new Track(id, context, mixer.masterMix(), mixer.reverb(), mixer.delay())
-    console.log('addTrack', track)
-    setState(state => ({ 
-      ...state, 
-      tracks: [...tracks, track] 
-    }))
-    console.log('TRACKS', tracks)
-  }
+  
 
-  const triggerSample = (buffer, time) => {
-    const sample = new Sample( context, buffer ),
-    pannedSample = new PannerNode( context, sample)
-    console.log('mixer.masterMix',mixer.reverb())
-    connectGain(context, pannedSample, mixer.reverb())
-    connectGain(context, pannedSample, mixer.delay())
-    connectGain(context, pannedSample, mixer.masterMix())
-    trigger(sample, time);
-  }
+  
 
   // function playTrack(index) {
   //   if (index === state.currentTrackIndex) {

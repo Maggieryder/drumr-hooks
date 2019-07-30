@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect  } from 'react'
 import PropTypes from 'prop-types'
 import Track from './track'
 
@@ -10,14 +10,8 @@ const Tracks = () => {
 
   const { tracks } = useDrumr()
 
-  const buildTracks = () => {
-    return tracks.map((track,i ) => {
-      return <Track key={i} trackId={track.trackId} />
-    })
-  }
-
   useEffect(() => {
-
+    console.log('[ TRACKS ] tracks', tracks)
     return (() => {
       
     })
@@ -25,7 +19,9 @@ const Tracks = () => {
 
   return (
       <div className={classes.tracks}>    
-        { buildTracks() }
+        { tracks.map((track, i ) => {
+            return <Track key={i} track={track} />
+          }) }
       </div>
   );
 }
