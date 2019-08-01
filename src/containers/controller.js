@@ -30,7 +30,9 @@ const Controller = () => {
           numSteps, 
           setNumSteps,
           tracks,
+          addTrack,
           setTracks } = useDrumr()
+
 
   const numBarsOptions = [
     {label:'1', value:1},
@@ -47,17 +49,25 @@ const Controller = () => {
   ]
   useEffect(() => {
     loadData('./resources')
-    
-    
     return (() => {
       
     })
-  }, []);
+  }, [])
+  
+  useEffect(() => {
+    const { all } = tracks
+    console.log('all', all.length)
+    return (() => {
+      
+    })
+  }, [tracks])
+
   useEffect(() => {
     if (kits) {
       // console.log('kits', kits, currentKit)
       loadBuffers(kits[currentKit], 'kitBuffers')
-      if (tracks.length<1) setTracks()
+      
+      //if (all.length<1) setTracks()
     }  
     return (() => {
       
@@ -119,6 +129,12 @@ const Controller = () => {
           initialValue={numSteps.toString()}
         />
         <Label>Number of steps</Label>
+      </Control>
+      <Control>
+        <button
+          onClick={ value => addTrack(tracks.all.length) }
+        >+</button>
+        <Label>Add Track</Label>
       </Control>
         
       </div>

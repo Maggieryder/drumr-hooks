@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useReducer } from 'react'
 
 import { initAudioCtx } from '../api/AudioCtx'
+
+import tracksReducer from '../reducers/tracksReducer'
 
 const initialState = {
   context: initAudioCtx(),
@@ -19,16 +21,22 @@ const initialState = {
   numBeats: 4,
   numSteps: 16,
   mixer: null,
-  sequences: [], 
-  tracks: []
-};
+  sequences: []
+}
+
+// const initialTracksState = {
+//   all: [],
+//   soloed: [],
+//   muted: []
+// }
 
 const DrumrContext =  React.createContext([{}, () => {}])
 
 const DrumrProvider = (props) => {
   const [state, setState] = useState(initialState);
+  // const [tracks, dispatch] = useReducer(tracksReducer, initialTracksState)
   return (
-    <DrumrContext.Provider value={[state, setState]}>
+    <DrumrContext.Provider value={[state, setState, tracks, dispatch]}>
       {props.children}
     </DrumrContext.Provider>
   );

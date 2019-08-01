@@ -5,11 +5,33 @@ import { DrumrContext } from '../context/DrumrContext'
 // import { initAudioCtx } from '../api/AudioCtx'
 import { Sample, PannerNode, connectGain, trigger } from '../api/Sample'
 
+import tracksReducer, { initialState } from '../reducers/tracksReducer'
+
 
 
 import Mixer from '../api/Mixer'
 import Track from '../api/Track'
 // import SQR from '../api/Sequencer'
+
+// const initialTracksState = {
+//   all: [],
+//   soloed: [],
+//   muted: []
+// }
+
+// const tracksReducer = (state, action) => {
+//   console.log('tracksReducer action', action)
+//   switch (action.type){
+//     case 'ADD_TRACK':
+//       return {
+//         ...state,
+//         all: [...state.all, action.value]
+//       }
+//     default:
+//         return state
+//   }
+  
+// }
 
 
 const useDrumr = () => {
@@ -30,12 +52,15 @@ const useDrumr = () => {
     numBars,
     numBeats,
     numSteps,
-    sequences,
-    tracks
+    sequences
      } = state
 
 
   const mixer = new Mixer(context)
+
+  const [tracks, dispatch] = useReducer(tracksReducer, initialState)
+
+  // console.log('tracks',tracks)
 
   
 
@@ -51,18 +76,26 @@ const useDrumr = () => {
   // }, []);
 
   const setTracks = () => {
-    [0,1,2,3].map((item, i)=> addTrack(i))
-    console.log(' - - - TRACKS', tracks)
+    [0,1,2,3].map((item, i)=> addTrack(i)) 
   }
 
   const addTrack = (id) => {
     const track = new Track(id, context, mixer)
     // console.log('addTrack', track)
-    setState(state => ({ 
-      ...state, 
-      tracks: [...state.tracks, track] 
-    }))
-    // dispatch({ type:'addTrack', value: track })
+    // setState(state => ({ 
+    //   ...state, 
+    //   tracks: [...state.tracks, track] 
+    // }))
+    dispatch({ type:'ADD_TRACK', value: track })
+    // console.log(' - - - TRACKS', tracks)
+  }
+
+  const muteTrack = (id) => {
+    dispatch({ type:'MUTE_TRACK', value: id })
+  }
+
+  const soloTrack = (id) => {
+    dispatch({ type:'SOLO_TRACK', value: id })
   }
 
 
@@ -282,6 +315,7 @@ const useDrumr = () => {
     numBeats,
     sequences,
     tracks,
+    addTrack,
     setTracks,
     setTempo,
     setSwing,
