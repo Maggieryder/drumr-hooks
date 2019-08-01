@@ -74,9 +74,15 @@ class Mixer {
   compressor(){
     return this._compressor.node()
   }
+  
+  toggleReverb(isOn){
+    this._reverb.toggleOn(isOn)
+  }
   reverbBuffer(buffer){
-    console.log('[ mixer] reverbBuffer', buffer)
     this._reverb.setImpulse(buffer)
+  }
+  toggleDelay(isOn){
+    this._delay.toggleOn(isOn)
   }
   // addTrack(){
   //   const id = this._tracks.length

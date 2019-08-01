@@ -51,8 +51,7 @@ const useDrumr = () => {
   // }, []);
 
   const setTracks = () => {
-    [0,1,2,3].map((item, i)=> addTrack(i))
-    console.log(' - - - TRACKS', tracks)
+    [0,1,2,3].map(i=> addTrack(i))
   }
 
   const addTrack = (id) => {
@@ -126,9 +125,7 @@ const useDrumr = () => {
     }
   }
 
-  const assignReverbBuffer = (buffer) => {
-    mixer.reverbBuffer(buffer)
-  }
+  
 
   const setCurrentKit = index => {
     console.log('setCurrentKit', index)
@@ -148,25 +145,14 @@ const useDrumr = () => {
 
   const onNoteTap = (trackId, barId, stepId) => {
     // e.preventDefault();
-    console.log('trackIndex', trackId, 'bar', barId, 'step', stepId);
+    console.log('trackId', trackId, 'barId', barId, 'stepId', stepId);
     const track = tracks[trackId]
-    console.log('track', track)
-    const voiceId = track.voiceId
-    triggerSample(kitBuffers[trackId].buffer, 0)
+    track.triggerSample(0)
     // console.log('Sequencer.running', Sequencer.running());
     // if (!Sequencer.running()){
     //   // MIXER.tracks[trackIndex].triggerSample(CTX.currentTime);
     //   // Sequencer.sequenceNote(trackId, barId, stepId);
     // }  
-  }
-  const triggerSample = (buffer, time) => {
-    const sample = new Sample( context, buffer ),
-    pannedSample = new PannerNode( context, sample)
-    console.log('mixer.masterMix',mixer.reverb())
-    connectGain(context, pannedSample, mixer.reverb())
-    connectGain(context, pannedSample, mixer.delay())
-    connectGain(context, pannedSample, mixer.masterMix())
-    trigger(sample, time);
   }
 
   const setTempo = value => {
@@ -209,18 +195,15 @@ const useDrumr = () => {
     }))
   }
 
-  // const setMixer = () => {
-  //   console.log('setMixer', state.context)
-  //   setState(state => ({ 
-  //     ...state, 
-  //     mixer: new Mixer(state.context) 
-  //   }))
-  // }
-  
-
-  
-
-  
+  const toggleReverb = (isOn) => {
+    mixer.toggleReverb(isOn)
+  }
+  const assignReverbBuffer = (buffer) => {
+    mixer.reverbBuffer(buffer)
+  }
+  const toggleDelay = (isOn) => {
+    mixer.toggleDelay(isOn)
+  }
 
   // function playTrack(index) {
   //   if (index === state.currentTrackIndex) {
@@ -272,7 +255,6 @@ const useDrumr = () => {
     verbBuffers,
     currentKit,
     currentVerb,
-    assignReverbBuffer,
     onNoteTap,
     signature,
     tempo, 
@@ -287,7 +269,10 @@ const useDrumr = () => {
     setSwing,
     setNumBars,
     setNumBeats,
-    setNumSteps
+    setNumSteps,
+    toggleReverb,
+    assignReverbBuffer,
+    toggleDelay
   }
 };
 

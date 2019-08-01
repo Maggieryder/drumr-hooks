@@ -23,8 +23,8 @@
 //   }
 // }
 
-const Sample = (ctx, buffer) => {
-  const source = ctx.createBufferSource()
+const Sample = (context, buffer) => {
+  const source = context.createBufferSource()
   source.buffer = buffer
   return source
 }

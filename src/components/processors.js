@@ -13,9 +13,9 @@ import useDrumr from '../hooks/useDrumr'
 
 // const API_URL = 'http://some-api.com'
 
-const Processors = ({reverbs}) => {
+const Processors = () => {
 
-  const { verbBuffers, assignReverbBuffer } = useDrumr();
+  const { verbBuffers, assignReverbBuffer, toggleReverb } = useDrumr();
 
   // reverb processing
   const [reverbId, setReverbId] = useState(0)
@@ -43,13 +43,22 @@ const Processors = ({reverbs}) => {
   }, [verbBuffers]);
 
   useEffect(() => {
-    console.log('[Processors] reverb', reverbId)
+    console.log('[Processors] reverb id', reverbId)
     // update reverb
     assignReverbBuffer(verbBuffers[reverbId].buffer)
     return (() => {
       
     })
   }, [reverbId])
+
+  useEffect(() => {
+    console.log('[Processors] reverb on', reverbOn)
+    // update reverb
+    toggleReverb(reverbOn)
+    return (() => {
+      
+    })
+  }, [reverbOn])
 
   useEffect(() => {
     console.log('[Processors] delay', delayTime, delayFeedback, delayFrequency, delayOn)

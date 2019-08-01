@@ -29,6 +29,7 @@ class Reverb extends Processor {
     request.send();
   }
   setImpulse(buffer){
+    console.log('[ Reverb] setImpulse', buffer)
     this._convolver.buffer = buffer;
     this._convolverGain.gain.value = .7
   }
@@ -44,7 +45,7 @@ class Reverb extends Processor {
     return this._convolver
   }
   gain(){
-    return this._convolverGain
+    return this._convolverGain.gain
   }
 }
 
