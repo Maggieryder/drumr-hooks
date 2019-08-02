@@ -157,9 +157,7 @@ const useDrumr = () => {
     }
   }
 
-  const assignReverbBuffer = (buffer) => {
-    mixer.reverbBuffer(buffer)
-  }
+
 
   const setCurrentKitId = index => {
     console.log('setCurrentKit', index)
@@ -167,12 +165,11 @@ const useDrumr = () => {
   }
 
   const onNoteTap = (trackId, barId, stepId) => {
-    // e.preventDefault();
+    console.log(tracks.all)
     console.log('trackIndex', trackId, 'bar', barId, 'step', stepId);
-    const track = tracks[trackId]
+    const track = tracks.all[trackId]
     console.log('track', track)
-    // const voiceId = track.voiceId
-    triggerSample(kitBuffers[trackId].buffer, 0)
+    track.triggerSample(0)
     // console.log('Sequencer.running', Sequencer.running());
     // if (!Sequencer.running()){
     //   // MIXER.tracks[trackIndex].triggerSample(CTX.currentTime);
@@ -214,18 +211,15 @@ const useDrumr = () => {
     dispatch({ type: TYPES.UPDATE_NUMSTEPS, value })
   }
 
-  // const setMixer = () => {
-  //   console.log('setMixer', state.context)
-  //   setState(state => ({ 
-  //     ...state, 
-  //     mixer: new Mixer(state.context) 
-  //   }))
-  // }
-  
-
-  
-
-  
+  const toggleReverb = (isOn) => {
+    mixer.toggleReverb(isOn)
+  }
+  const assignReverbBuffer = (buffer) => {
+    mixer.reverbBuffer(buffer)
+  }
+  const toggleDelay = (isOn) => {
+    mixer.toggleDelay(isOn)
+  }
 
   // function playTrack(index) {
   //   if (index === state.currentTrackIndex) {
@@ -293,7 +287,10 @@ const useDrumr = () => {
     setSwing,
     setNumBars,
     setNumBeats,
-    setNumSteps
+    setNumSteps,
+    toggleReverb,
+    assignReverbBuffer,
+    toggleDelay
   }
 };
 
