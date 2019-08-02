@@ -5,7 +5,7 @@ export const initialState = {
     soloed: [],
     muted: []
 }
-// export default function(state = INITIAL_STATE, action) {
+// export default function(state = initialState, action) {
 const tracksReducer = (state, action) => {
   console.log('tracksReducer action', action)
   switch (action.type){
