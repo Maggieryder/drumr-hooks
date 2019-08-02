@@ -5,8 +5,7 @@ export const initialState = {
     soloed: [],
     muted: []
 }
-// export default function(state = initialState, action) {
-const tracksReducer = (state, action) => {
+export default function(state = initialState, action) {
   console.log('tracksReducer action', action)
   switch (action.type){
     case TYPES.ADD_TRACK:
@@ -43,5 +42,3 @@ const tracksReducer = (state, action) => {
         return state
   } 
 }
-
-export default tracksReducer

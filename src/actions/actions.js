@@ -30,14 +30,9 @@ export const updateSignature = ( arr ) => ({
   value: arr
 })
 
-export const setKits = ( kits ) => ({
-  type: TYPES.SET_KITS,
-  value: kits
-})
-
-export const setVerbs = ( verbs ) => ({
-  type: TYPES.SET_KITS,
-  value: verbs
+export const dataLoaded = ( data ) => ({
+  type: TYPES.DATA_LOADED,
+  value: data
 })
 
 export const updateKitId = ( id ) => ({

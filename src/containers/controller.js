@@ -16,8 +16,8 @@ const Controller = () => {
           loadData, 
           loadBuffers, 
           kits, 
-          currentKit, 
-          setCurrentKit, 
+          currentKitId, 
+          setCurrentKitId, 
           verbs, 
           tempo, 
           setTempo, 
@@ -53,7 +53,7 @@ const Controller = () => {
       
     })
   }, [])
-  
+
   useEffect(() => {
     const { all } = tracks
     console.log('all', all.length)
@@ -65,14 +65,14 @@ const Controller = () => {
   useEffect(() => {
     if (kits) {
       // console.log('kits', kits, currentKit)
-      loadBuffers(kits[currentKit], 'kitBuffers')
+      loadBuffers(kits[currentKitId], 'kitBuffers')
       
       //if (all.length<1) setTracks()
     }  
     return (() => {
       
     })
-  }, [kits, currentKit]);
+  }, [kits, currentKitId]);
 
   useEffect(() => { 
     if (verbs) {
@@ -91,8 +91,8 @@ const Controller = () => {
         {kits ? <Control>
                   <Select
                     options={kits}
-                    onValueChange={ value => setCurrentKit(value) }
-                    initialValue={currentKit.toString()}
+                    onValueChange={ value => setCurrentKitId(value) }
+                    initialValue={currentKitId.toString()}
                   />
                   <Label>Current kit</Label>
                 </Control> : null }

@@ -1,6 +1,6 @@
 import * as TYPES from '../actions'
 
-export const initialState = {
+const initialState = {
   isLoading: false,
   hasError: null,
   isPlaying: false,
@@ -17,9 +17,8 @@ export const initialState = {
   numBeats: 4,
   numSteps: 16
 }
-// export default function(state = INITIAL_STATE, action) {
-const controllerReducer = (state, action) => {
-    console.log('controllerReducer action', action)
+export default function(state = initialState, action) {
+    // console.log('controllerReducer action', action)
     switch (action.type){
         case TYPES.UPDATE_TEMPO:
             return {
@@ -51,16 +50,6 @@ const controllerReducer = (state, action) => {
               ...state,
               signature: action.value
             }
-        case TYPES.SET_KITS:
-            return {
-              ...state,
-              kits: action.value
-            }
-        case TYPES.SET_VERBS:
-            return {
-              ...state,
-              verbs: action.value
-            }
         case TYPES.UPDATE_KIT_ID:
             return {
               ...state,
@@ -74,22 +63,32 @@ const controllerReducer = (state, action) => {
         case TYPES.UPDATE_KIT_BUFFERS:
             return {
               ...state,
-              kitBuffers: action.value
+              kitBuffers: action.value,
+              isLoading: false
             }
         case TYPES.UPDATE_VERB_BUFFERS:
             return {
               ...state,
-              verbBuffers: action.value
+              verbBuffers: action.value,
+              isLoading: false
             }
         case TYPES.IS_LOADING:
             return {
               ...state,
               isLoading: action.value
             }
+        case TYPES.DATA_LOADED:
+            return {
+              ...state,
+              kits: action.value.kits,
+              verbs: action.value.verbs,
+              isLoading: false
+            }
         case TYPES.HAS_ERROR:
             return {
               ...state,
-              hasError: action.value
+              hasError: action.value,
+              isLoading: false
             }
         case TYPES.IS_PLAYING:
             return {
@@ -100,5 +99,3 @@ const controllerReducer = (state, action) => {
             return state
     } 
 }
-
-export default controllerReducer

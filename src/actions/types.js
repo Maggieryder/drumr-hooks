@@ -10,10 +10,6 @@ export const UPDATE_NUMSTEPS = 'UPDATE_NUMSTEPS'
 
 export const UPDATE_SIGNATURE = 'UPDATE_SIGNATURE'
 
-export const SET_KITS = 'SET_KITS'
-
-export const SET_VERBS = 'SET_VERBS'
-
 export const UPDATE_KIT_ID = 'UPDATE_KIT_ID'
 
 export const UPDATE_VERB_ID = 'UPDATE_VERB_ID'
@@ -28,6 +24,8 @@ export const IS_LOADING = 'IS_LOADING'
 
 export const HAS_ERROR = 'HAS_ERROR'
 
+export const DATA_LOADED = 'DATA_LOADED'
+
 
 export const ADD_TRACK = 'ADD_TRACK'
 
@@ -35,7 +33,11 @@ export const REMOVE_TRACK = 'REMOVE_TRACK'
 
 export const MUTE_TRACK = 'MUTE_TRACK'
 
+export const UNMUTE_TRACK = 'UNMUTE_TRACK'
+
 export const SOLO_TRACK = 'SOLO_TRACK'
+
+export const UNSOLO_TRACK = 'UNSOLO_TRACK'
 
 export const UPDATE_TRACK_VOICE_ID = 'UPDATE_TRACK_VOICE_ID'
 

@@ -18,3 +18,5 @@ const App = (props) => {
 }
 
 export default App;
+
+// value={{state, dispatch}}
