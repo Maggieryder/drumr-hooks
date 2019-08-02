@@ -8,7 +8,7 @@ export default class Track {
   constructor(id, context, mixer){
     this._trackId = id
     this._context = context
-    this._destination = mixer.masterMix()
+    this._destination = mixer.dryMix()
     this._reverbNode = mixer.reverb()
     this._delayNode = mixer.delay()
     this._buffer = null

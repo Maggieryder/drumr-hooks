@@ -13,11 +13,12 @@ class Processor {
   disconnect() {
 
   }
-  toggle() {
-    this._isOn = !this._isOn
-    this._isOn ? this.connect() : this.disconnect()
+  toggleOn(isOn) {
+    console.log('[Processor] toggleOn', isOn)
+    this._isOn = isOn
+    isOn ? this.connect() : this.disconnect()
   }
-  isConnected(){ return this.isOn}
+  isConnected(){ return this._isOn}
 }
 
 export default Processor

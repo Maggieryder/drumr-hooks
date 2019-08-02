@@ -221,6 +221,10 @@ const useDrumr = () => {
     mixer.toggleDelay(isOn)
   }
 
+  // const updateWetVolume = (val) => {
+  //   mixer.updateWetVolume(val)
+  // }
+
   // function playTrack(index) {
   //   if (index === state.currentTrackIndex) {
   //     togglePlay();
@@ -289,8 +293,8 @@ const useDrumr = () => {
     setNumBeats,
     setNumSteps,
     toggleReverb,
-    assignReverbBuffer,
-    toggleDelay
+    toggleDelay,
+    // updateWetVolume
   }
 };
 

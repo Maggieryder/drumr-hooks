@@ -80,14 +80,14 @@ const Controls = ( { track } ) => {
           />
       </Control> 
       <Control>
-        <InputRange id='reverb' min={0} max={100} step={1} onChange={e => setReverbSend({ trackId: track.id(), value: e.target.value })} value={+reverbSend}></InputRange>
+        <InputRange id='reverb' min={0} max={10} step={.1} onChange={e => setReverbSend({ trackId: track.id(), value: e.target.value })} value={+reverbSend}></InputRange>
         <Label>Reverb</Label>
-        <CurrentValue>{Math.round(reverbSend/10).toString()}</CurrentValue>
+        <CurrentValue>{Math.round(reverbSend).toString()}</CurrentValue>
       </Control>
       <Control>
-        <InputRange id='delay' min={0} max={100} step={1} onChange={e => setDelaySend({ trackId: track.id(), value: e.target.value })} value={+delaySend}></InputRange>
+        <InputRange id='delay' min={0} max={10} step={.1} onChange={e => setDelaySend({ trackId: track.id(), value: e.target.value })} value={+delaySend}></InputRange>
         <Label>Delay</Label>
-        <CurrentValue>{Math.round(delaySend/10).toString()}</CurrentValue>
+        <CurrentValue>{Math.round(delaySend).toString()}</CurrentValue>
       </Control>
       <Control>
         <InputRange id='gain' min={0} max={10} step={.1} onChange={e => setGain({ trackId: track.id(), value: e.target.value })} value={+gain}></InputRange>

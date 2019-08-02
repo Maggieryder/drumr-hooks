@@ -8,7 +8,7 @@ class Reverb extends Processor {
   init(){
     this._convolver = this._context.createConvolver()
     this._convolverGain = this._context.createGain()
-    this._convolverGain.gain.value = 0
+    this._convolverGain.gain.value = .7
     this._convolver.loop = true
     this._convolver.normalize = true
     this.connect()
@@ -44,7 +44,7 @@ class Reverb extends Processor {
     return this._convolver
   }
   gain(){
-    return this._convolverGain
+    return this._convolverGain.gain
   }
 }
 

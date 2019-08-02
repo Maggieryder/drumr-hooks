@@ -3,7 +3,12 @@ import * as TYPES from '../actions'
 export const initialState = {
     all: [],
     soloed: [],
-    muted: []
+    muted: [],
+    // voiceIds: [],
+    // volumes: [],
+    // pans: [],
+    // reverbSends: [],
+    // delaySends: []
 }
 export default function(state = initialState, action) {
   console.log('tracksReducer action', action)
