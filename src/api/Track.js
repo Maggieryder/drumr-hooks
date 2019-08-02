@@ -1,5 +1,5 @@
 // import * as Types from '../actions/types'
-// import Sample from './Sample'
+import { Sample, PannerNode, trigger } from './Sample'
 // import Panner from './Panner'
 // import AudioProcessor from './AudioProcessor'
 
@@ -11,6 +11,7 @@ export default class Track {
     this._destination = mixer.masterMix()
     this._reverbNode = mixer.reverb()
     this._delayNode = mixer.delay()
+    this._buffer = null
     // this.store = store;
     // this.store.subscribe(this.updateState.bind(this));
 
@@ -93,7 +94,7 @@ export default class Track {
     // this._outputGain.gain.value = value;
   }
   updateReverbSend(value){
-    // console.log('Track '+this.id()+' send ' + index, 'value '+value )
+    console.log('[Track Api] updateReverbSend id '+this.id()+' send', value )
     this._reverbSendGain.gain.value = value;
   }
   reverbSend(){
@@ -119,4 +120,21 @@ export default class Track {
     // this._meter.disconnect();
     this._outputGain.disconnect(this._destination);
   }
+  assignTrackBuffer(buffer){
+    console.log('[Track Api] assignTrackBuffer', buffer)
+    this._buffer = buffer
+  }
+  triggerSample(time) {
+    const sample = new Sample( this._context, this._buffer ),
+    pannedSample = new PannerNode( this._context, sample)
+    pannedSample.connect(this._reverbSendGain)
+    pannedSample.connect(this._delaySendGain)
+    pannedSample.connect(this._outputGain)
+    // console.log('mixer.masterMix',mixer.reverb())
+    // connectGain(context, pannedSample, mixer.reverb())
+    // connectGain(context, pannedSample, mixer.delay())
+    // connectGain(context, pannedSample, mixer.masterMix())
+    trigger(sample, time);
+  }
 }
+
