@@ -28,16 +28,9 @@ const useTrack = () => {
      } = state
 
 
-  // const setTrackId = ({ trackId, value }) => {
-  //   console.log('[useTrack] setVoiceId', { trackId, value })
-  //   setState(state => ({ 
-  //     ...state, 
-  //     trackId: value 
-  //   }));
-  // }
-
   const setVoiceId = ({ trackId, value }) => {
     console.log('[useTrack] setVoiceId', { trackId, value })
+    // tracks.all[trackId].assignTrackBuffer(kitBuffers[voiceId].buffer)
     setState(state => ({ 
       ...state, 
       voiceId: value 
@@ -46,7 +39,7 @@ const useTrack = () => {
 
   const setGain = ({ trackId, value }) => {
     console.log('[useTrack] setGain', { trackId, value })
-    tracks[trackId].updateVolume(value)
+    tracks.all[trackId].updateVolume(value)
     setState(state => ({ 
       ...state, 
       gain: value 
@@ -55,7 +48,7 @@ const useTrack = () => {
 
   const setPan = ({ trackId, value }) => {
     console.log('[useTrack] setPan', { trackId, value })
-    // track.updatePan(value)
+    tracks.all[trackId].updatePan(value)
     setState(state => ({ 
       ...state, 
       pan: value 
@@ -64,7 +57,7 @@ const useTrack = () => {
 
   const setReverbSend = ({ trackId, value }) => {
     console.log('[useTrack] setReverbSend', { trackId, value })
-    // track.updateReverbSend(value)
+    tracks.all[trackId].updateReverbSend(value)
     setState(state => ({ 
       ...state, 
       reverbSend: value 
@@ -73,7 +66,7 @@ const useTrack = () => {
 
   const setDelaySend = ({ trackId, value }) => {
     console.log('[useTrack] setDelaySend', { trackId, value })
-    // track.updateDelaySend(value)
+    tracks.all[trackId].updateDelaySend(value)
     setState(state => ({ 
       ...state, 
       delaySend: value 
@@ -91,7 +84,7 @@ const useTrack = () => {
 
   const setMute = ({ trackId, value }) => {
     console.log('[useTrack] setMute', { trackId, value })
-    tracks[trackId].toggleMute()
+    tracks.all[trackId].toggleMute()
     setState(state => ({ 
       ...state, 
       mute: value 

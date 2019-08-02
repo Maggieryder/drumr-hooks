@@ -28,13 +28,12 @@ const Sample = (ctx, buffer) => {
   source.buffer = buffer
   return source
 }
-const PannerNode = (context, input) => {
+const PannerNode = (context) => {
   const pannerNode = context.createPanner()
   pannerNode.panningModel = 'equalpower';
   pannerNode.distanceModel = 'linear';
   pannerNode.rolloffFactor = 0;
   pannerNode.coneOuterAngle = 0;
-  input.connect(pannerNode);
   return pannerNode
 }
 
