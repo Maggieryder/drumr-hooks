@@ -43,6 +43,7 @@ const Controls = ( { track } ) => {
     })
   }, [voiceId])
 
+
   // useEffect(() => {
   //   console.log('[Controls] track.id reverbSend', track.id(), reverbSend)
   //   tracks.all[track.id()].updateReverbSend(reverbSend/100)
@@ -59,6 +60,7 @@ const Controls = ( { track } ) => {
   //   })
   // }, [delaySend])
 
+
   useEffect(() => {
     // console.log('[Controls] reverbSend', reverbSend)
     // console.log('[Controls] delaySend', delaySend)
@@ -69,6 +71,7 @@ const Controls = ( { track } ) => {
     return (() => {
       
     })
+
   }, [delaySend, gain, pan, mute, solo]);
 
   return (

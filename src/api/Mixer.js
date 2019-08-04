@@ -74,6 +74,7 @@ class Mixer {
   wetMix(){
     return this._wetMix
   }
+
   dryMix(){
     return this._dryMix
   }
@@ -97,6 +98,7 @@ class Mixer {
   // toggleDelay(isOn){
   //   this._delay.toggleOn(isOn)
   // }
+
   // addTrack(){
   //   const id = this._tracks.length
   //   const track = new Track(id, this._context, this._masterMix, this.reverb(), this.delay())

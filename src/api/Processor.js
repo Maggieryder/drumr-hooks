@@ -2,7 +2,7 @@ class Processor {
   constructor(context, destination){
     this._context = context
     this._destination = destination
-    this._isOn = false;
+    // this._isOn = false;
   }
   init(){
     

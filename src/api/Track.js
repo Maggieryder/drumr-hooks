@@ -9,10 +9,12 @@ import { AUDIO_CONTEXT, MIXER, REVERB, DELAY } from './'
 export default class Track {
   constructor(id, context, mixer){
     this._trackId = id
+
     this._context = AUDIO_CONTEXT
     this._destination = MIXER.dryMix()
     this._reverbNode = REVERB.node()
     this._delayNode = DELAY.node()
+
     this._buffer = null
     // this.store = store;
     // this.store.subscribe(this.updateState.bind(this));
@@ -155,6 +157,22 @@ export default class Track {
     // this._panner.connect(this._reverbSendGain)
     // this._panner.connect(this._delaySendGain)
     // this._panner.connect(this._outputGain)
+    trigger(sample, time);
+  }
+  assignTrackBuffer(buffer){
+    console.log('[Track Api] assignTrackBuffer', buffer)
+    this._buffer = buffer
+  }
+  triggerSample(time) {
+    const sample = new Sample( this._context, this._buffer ),
+    pannedSample = new PannerNode( this._context, sample)
+    pannedSample.connect(this._reverbSendGain)
+    pannedSample.connect(this._delaySendGain)
+    pannedSample.connect(this._outputGain)
+    // console.log('mixer.masterMix',mixer.reverb())
+    // connectGain(context, pannedSample, mixer.reverb())
+    // connectGain(context, pannedSample, mixer.delay())
+    // connectGain(context, pannedSample, mixer.masterMix())
     trigger(sample, time);
   }
 }

@@ -168,18 +168,18 @@ const useDrumr = () => {
     }
   }
 
-
-
   const setCurrentKitId = index => {
     console.log('setCurrentKit', index)
     dispatch({ type: TYPES.UPDATE_KIT_ID, value: index })
   }
 
   const onNoteTap = (trackId, barId, stepId) => {
+
     console.log(tracks.all)
     console.log('trackIndex', trackId, 'bar', barId, 'step', stepId);
     const track = tracks.all[trackId]
     console.log('track', track)
+
     track.triggerSample(0)
     // console.log('Sequencer.running', Sequencer.running());
     // if (!Sequencer.running()){
@@ -187,6 +187,7 @@ const useDrumr = () => {
     //   // Sequencer.sequenceNote(trackId, barId, stepId);
     // }  
   }
+
   const triggerSample = (buffer, time) => {
     const sample = new Sample( AUDIO_CONTEXT, buffer ),
     pannedSample = new PannerNode( AUDIO_CONTEXT, sample)
@@ -198,6 +199,7 @@ const useDrumr = () => {
     connectGain(AUDIO_CONTEXT, pannedSample, MIXER.masterMix())
     trigger(sample, time);
   }
+
 
   const setTempo = value => {
     console.log('setTempo', value)
@@ -225,6 +227,7 @@ const useDrumr = () => {
   }
 
   const toggleReverb = (isOn) => {
+
     REVERB.toggleReverb(isOn)
   }
   const assignReverbBuffer = (buffer) => {
@@ -237,6 +240,7 @@ const useDrumr = () => {
   // const updateWetVolume = (val) => {
   //   mixer.updateWetVolume(val)
   // }
+
 
   // function playTrack(index) {
   //   if (index === state.currentTrackIndex) {
@@ -286,9 +290,11 @@ const useDrumr = () => {
     verbs,
     kitBuffers,
     verbBuffers,
+
     currentKitId,
     currentVerbId,
     assignReverbBuffer,
+
     onNoteTap,
     signature,
     tempo, 
@@ -306,8 +312,10 @@ const useDrumr = () => {
     setNumBeats,
     setNumSteps,
     toggleReverb,
+
     toggleDelay,
     // updateWetVolume
+
   }
 };
 
