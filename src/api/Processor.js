@@ -5,7 +5,7 @@ class Processor {
     // this._isOn = false;
   }
   init(){
-
+    
   }
   connect(){
 
@@ -14,11 +14,21 @@ class Processor {
 
   }
   toggleOn(isOn) {
-    console.log('[Processor] isOn', isOn)
-    // this._isOn = !this._isOn
-    isOn ? this.connect() : this.disconnect()
+    console.log('[Processor] toggleOn', isOn)
+    if (!isOn && this.isConnected()){
+      this.disconnect()
+    } else if (isOn && !this.isConnected()){
+      this.connect()
+    }
+    this._isOn = isOn
   }
-  // isConnected(){ return this.isOn}
+  isConnected(){ return this._isOn}
+  destroy(){
+    console.log('this.isConnected()', this.isConnected())
+    if (this.isConnected()) {
+      this.disconnect()
+    }
+  }
 }
 
 export default Processor

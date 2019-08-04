@@ -16,8 +16,8 @@ const Controller = () => {
           loadData, 
           loadBuffers, 
           kits, 
-          currentKit, 
-          setCurrentKit, 
+          currentKitId, 
+          setCurrentKitId, 
           verbs, 
           tempo, 
           setTempo, 
@@ -30,7 +30,9 @@ const Controller = () => {
           numSteps, 
           setNumSteps,
           tracks,
+          addTrack,
           setTracks } = useDrumr()
+
 
   const numBarsOptions = [
     {label:'1', value:1},
@@ -47,22 +49,30 @@ const Controller = () => {
   ]
   useEffect(() => {
     loadData('./resources')
-    
-    
     return (() => {
       
     })
-  }, []);
+  }, [])
+
+  useEffect(() => {
+    const { all } = tracks
+    console.log('all', all.length)
+    return (() => {
+      
+    })
+  }, [tracks])
+
   useEffect(() => {
     if (kits) {
       // console.log('kits', kits, currentKit)
-      loadBuffers(kits[currentKit], 'kitBuffers')
-      if (tracks.length<1) setTracks()
+      loadBuffers(kits[currentKitId], 'kitBuffers')
+      
+      //if (all.length<1) setTracks()
     }  
     return (() => {
       
     })
-  }, [kits, currentKit]);
+  }, [kits, currentKitId]);
 
   useEffect(() => { 
     if (verbs) {
@@ -81,8 +91,8 @@ const Controller = () => {
         {kits ? <Control>
                   <Select
                     options={kits}
-                    onValueChange={ value => setCurrentKit(value) }
-                    initialValue={currentKit.toString()}
+                    onValueChange={ value => setCurrentKitId(value) }
+                    initialValue={currentKitId.toString()}
                   />
                   <Label>Current kit</Label>
                 </Control> : null }
@@ -119,6 +129,12 @@ const Controller = () => {
           initialValue={numSteps.toString()}
         />
         <Label>Number of steps</Label>
+      </Control>
+      <Control>
+        <button
+          onClick={ value => addTrack(tracks.all.length) }
+        >+</button>
+        <Label>Add Track</Label>
       </Control>
         
       </div>

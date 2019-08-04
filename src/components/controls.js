@@ -37,31 +37,42 @@ const Controls = ( { track } ) => {
 
   useEffect(() => {
     console.log('[Controls] track.id voiceId', track.id(), voiceId)
-    tracks[track.id()].assignTrackBuffer(kitBuffers[voiceId].buffer)
+    tracks.all[track.id()].assignTrackBuffer(kitBuffers[voiceId].buffer)
     return (() => {
       
     })
   }, [voiceId])
 
-  useEffect(() => {
-    console.log('[Controls] track.id reverbSend', track.id(), reverbSend)
-    tracks[track.id()].updateReverbSend(reverbSend/100)
-    return (() => {
+
+  // useEffect(() => {
+  //   console.log('[Controls] track.id reverbSend', track.id(), reverbSend)
+  //   tracks.all[track.id()].updateReverbSend(reverbSend/100)
+  //   return (() => {
       
-    })
-  }, [reverbSend])
+  //   })
+  // }, [reverbSend])
+
+  // useEffect(() => {
+  //   console.log('[Controls] track.id delaySend', track.id(), delaySend)
+  //   tracks.all[track.id()].updateDelaySend(delaySend/100)
+  //   return (() => {
+      
+  //   })
+  // }, [delaySend])
+
 
   useEffect(() => {
     // console.log('[Controls] reverbSend', reverbSend)
     // console.log('[Controls] delaySend', delaySend)
-    console.log('[Controls] id gain', track.id(), gain)
+    // console.log('[Controls] id gain', track.id(), gain)
     // console.log('[Controls] pan', pan)
     // console.log('[Controls] mute', mute)
     // console.log('[Controls] solo', solo)
     return (() => {
       
     })
-  }, [delaySend, gain, pan, mute, solo])
+
+  }, [delaySend, gain, pan, mute, solo]);
 
   return (
     <div className={classes.controls}> 
@@ -72,19 +83,19 @@ const Controls = ( { track } ) => {
           />
       </Control> 
       <Control>
-        <InputRange id='reverb' min={0} max={100} step={1} onChange={e => setReverbSend({ trackId: track.id(), value: e.target.value })} value={+reverbSend}></InputRange>
+        <InputRange id='reverb' min={0} max={10} step={.1} onChange={e => setReverbSend({ trackId: track.id(), value: e.target.value })} value={+reverbSend}></InputRange>
         <Label>Reverb</Label>
-        <CurrentValue>{Math.round(reverbSend/10).toString()}</CurrentValue>
+        <CurrentValue>{Math.round(reverbSend).toString()}</CurrentValue>
       </Control>
       <Control>
-        <InputRange id='delay' min={0} max={100} step={1} onChange={e => setDelaySend({ trackId: track.id(), value: e.target.value })} value={+delaySend}></InputRange>
+        <InputRange id='delay' min={0} max={10} step={.1} onChange={e => setDelaySend({ trackId: track.id(), value: e.target.value })} value={+delaySend}></InputRange>
         <Label>Delay</Label>
-        <CurrentValue>{Math.round(delaySend/10).toString()}</CurrentValue>
+        <CurrentValue>{Math.round(delaySend).toString()}</CurrentValue>
       </Control>
       <Control>
-        <InputRange id='gain' min={0} max={100} step={1} onChange={e => setGain({ trackId: track.id(), value: e.target.value })} value={+gain}></InputRange>
+        <InputRange id='gain' min={0} max={10} step={.1} onChange={e => setGain({ trackId: track.id(), value: e.target.value })} value={+gain}></InputRange>
         <Label>Gain</Label>
-        <CurrentValue>{Math.round(gain/10).toString()}</CurrentValue>
+        <CurrentValue>{Math.round(gain).toString()}</CurrentValue>
       </Control>
       <Control>
         <InputRange id='pan' min={-50} max={50} step={1} onChange={e => setPan({ trackId: track.id(), value: e.target.value })} value={+pan}></InputRange>

@@ -1,20 +1,20 @@
 import Processor from './Processor'
 
 class Compressor extends Processor {
-  constructor(context, destination, source){
+  constructor(context, source, destination){
     super(context, destination)
-    this._compressor = this._context.createDynamicsCompressor()
     this._source = source
-    init()
+    this.init()
   }
   init(){
+    this._compressor = this._context.createDynamicsCompressor()
     // set to defaults
-    // this.updateThreshold(-24);
-    // this.updateKnee(30);
-    // this.updateRatio(12);
+    this.updateThreshold(-24);
+    this.updateKnee(30);
+    this.updateRatio(12);
     // readonly attribute: this.updateReduction(-20.0);
-    // this.updateAttack(0.003);
-    // this.updateRelease(.25); 
+    this.updateAttack(0.003);
+    this.updateRelease(.25); 
   }
   updateThreshold(val){
     console.log('updateThreshold', val);

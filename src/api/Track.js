@@ -3,22 +3,34 @@ import { Sample, PannerNode, trigger } from './Sample'
 // import Panner from './Panner'
 // import AudioProcessor from './AudioProcessor'
 
+import { AUDIO_CONTEXT, MIXER, REVERB, DELAY } from './'
+
 
 export default class Track {
   constructor(id, context, mixer){
     this._trackId = id
-    this._context = context
-    this._destination = mixer.masterMix()
-    this._reverbNode = mixer.reverb()
-    this._delayNode = mixer.delay()
+
+    this._context = AUDIO_CONTEXT
+    this._destination = MIXER.dryMix()
+    this._reverbNode = REVERB.node()
+    this._delayNode = DELAY.node()
+
     this._buffer = null
     // this.store = store;
     // this.store.subscribe(this.updateState.bind(this));
 
-    this._outputGain = this._context.createGain()
-    this._reverbSendGain = this._context.createGain()
-    this._delaySendGain = this._context.createGain()
-    // this._panner = new Panner(this._context, this._trackId)
+    this._outputGain = AUDIO_CONTEXT.createGain()
+    this._reverbSendGain = AUDIO_CONTEXT.createGain()
+    this._delaySendGain = AUDIO_CONTEXT.createGain()
+
+    this._panner = new PannerNode(AUDIO_CONTEXT)
+    this._panner.connect(this._reverbSendGain)
+    this._panner.connect(this._delaySendGain)
+    this._panner.connect(this._outputGain)
+    // this._reverbSendGain.connect(this._reverbNode)
+    // this._delaySendGain.connect(this._delayNode)
+    // this._outputGain.connect(this._destination)
+
     // this._meter = new AudioProcessor(this._context, this._trackId)
     // this._meter.init(this._outputGain, this._destination)
 
@@ -27,6 +39,9 @@ export default class Track {
     // this.buffer;
     this._mute = false
     this._solo = false
+    this.updateVolume(0)
+    this.updateReverbSend(0)
+    this.updateDelaySend(0)
     this.connect()
   }
 
@@ -83,15 +98,17 @@ export default class Track {
     return this._solo;
   }
   updateVolume(value){
-    console.log('Track '+this.id()+' volume', value )
+    console.log('[Track Api] updateVolume '+this.id()+' volume', value )
     this._outputGain.gain.value = value;
   }
   getVolume(){
     return this._outputGain.gain.value;
   }
   updatePan(value){
-    // console.log('Track '+this.id()+' volume', value )
-    // this._outputGain.gain.value = value;
+    console.log('[Track Api] updatePan id '+this.id()+' value', value )
+    let xpos = value,
+    zpos = 1 - Math.abs(xpos);
+    this._panner.setPosition(xpos, 0, zpos);
   }
   updateReverbSend(value){
     console.log('[Track Api] updateReverbSend id '+this.id()+' send', value )
@@ -101,24 +118,46 @@ export default class Track {
     return this._reverbSendGain.gain.value;
   }
   updateDelaySend(value){
-    // console.log('Track '+this.id()+' send ' + index, 'value '+value )
+    console.log('[Track Api] updateDelaySend id '+this.id()+' send', value )
     this._delaySendGain.gain.value = value;
   }
   delaySend(){
     return this._delaySendGain.gain.value;
   }
   connect(){
-    this._reverbSendGain.connect(this._reverbNode);
-    this._delaySendGain.connect(this._delayNode);
-    // this._meter.connect();
-    this._outputGain.connect(this._destination);
+    console.log('[Track Api] connect '+this.id())
+    this._reverbSendGain.connect(this._reverbNode)
+    this._delaySendGain.connect(this._delayNode)
+    this._outputGain.connect(this._destination)
+    // this._meter.connect()
   }
   disconnect(){
-    // console.log('Track '+this.id+' disconnect')
-    this._reverbSendGain.disconnect(this._reverbNode);
-    this._delaySendGain.disconnect(this._delayNode);
+    console.log('[Track Api] disconnect '+this.id())
+    this._reverbSendGain.disconnect(this._reverbNode)
+    this._delaySendGain.disconnect(this._delayNode)
+    this._outputGain.disconnect(this._destination)
     // this._meter.disconnect();
-    this._outputGain.disconnect(this._destination);
+  }
+  assignTrackBuffer(buffer){
+    console.log('[Track Api] assignTrackBuffer', buffer)
+    this._buffer = buffer
+  }
+  triggerSample(time) {
+    // this._sample.start(time)
+    // const sample = new Sample( this._context, this._buffer ),
+    // pannedSample = new PannerNode( this._context, sample)
+    
+    // console.log('mixer.masterMix',mixer.reverb())
+    // connectGain(context, pannedSample, mixer.reverb())
+    // connectGain(context, pannedSample, mixer.delay())
+    // connectGain(context, pannedSample, mixer.masterMix())
+    const sample = new Sample( AUDIO_CONTEXT, this._buffer )
+
+    sample.connect(this._panner);
+    // this._panner.connect(this._reverbSendGain)
+    // this._panner.connect(this._delaySendGain)
+    // this._panner.connect(this._outputGain)
+    trigger(sample, time);
   }
   assignTrackBuffer(buffer){
     console.log('[Track Api] assignTrackBuffer', buffer)
@@ -137,3 +176,4 @@ export default class Track {
     trigger(sample, time);
   }
 }
+

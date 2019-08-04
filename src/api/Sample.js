@@ -28,13 +28,19 @@ const Sample = (context, buffer) => {
   source.buffer = buffer
   return source
 }
-const PannerNode = (context, input) => {
+const PannerNode = (context) => {
   const pannerNode = context.createPanner()
   pannerNode.panningModel = 'equalpower';
   pannerNode.distanceModel = 'linear';
   pannerNode.rolloffFactor = 0;
   pannerNode.coneOuterAngle = 0;
-  input.connect(pannerNode);
+  pannerNode.positionX.value = -6; // hack to force first time refresh
+    /*this.panner.refDistance = 1;
+    this.panner.maxDistance = 10000;
+    this.panner.rolloffFactor = 0;
+    this.panner.coneInnerAngle = 360;
+    this.panner.coneOuterAngle = 0;
+    this.panner.coneOuterGain = 0;*/
   return pannerNode
 }
 

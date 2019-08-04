@@ -1,5 +1,7 @@
-import Reverb from '../api/Reverb'
-import Delay from '../api/Delay'
+// import Reverb from '../api/Reverb'
+// import Delay from '../api/Delay'
+// import Compressor from '../api/Delay'
+
 
 class Mixer {
   constructor(context){
@@ -14,18 +16,22 @@ class Mixer {
     this._wetMix = this._context.createGain()
     this._dryMix = this._context.createGain()
     this._masterMix = this._context.createGain()
-    this._reverb = new Reverb(this._context, this._wetMix)
-    this._delay = new Delay(this._context, this._wetMix)
+    // this._reverb = new Reverb(this._context, this.wetMix())
+    // this._delay = new Delay(this._context, this.wetMix())
     // console.log('this._reverb', this.reverb())
-    //this._compressor = new Compressor(this._context, this._masterMix)
+    // this._compressor = new Compressor(this._context, this.masterMix())
     this._wetMute = false
     this._dryMute = false
-    this.connectWetMix()
+    this.connect()
     this.updateWetVolume(.7)
-    this.connectDryMix()
     this.updateDryVolume(.7)
-    this.connectMasterMix()
     this.updateMasterVolume(.7)
+    // console.log('this.wetMix()', this.wetMix().gain.value)
+  }
+  connect() {
+    this.connectWetMix()
+    this.connectDryMix()
+    this.connectMasterMix()
   }
   connectWetMix(){
     this._wetMix.connect(this._masterMix)
@@ -40,7 +46,7 @@ class Mixer {
     this._dryMix.disconnect(this._masterMix)
   }
   connectMasterMix(){
-    this._masterMix.connect(this._context.destination)
+    this._masterMix.connect(this._context.destination) 
   }
   disconnectMasterMix(){
     this._masterMix.disconnect(this._context.destination)
@@ -65,25 +71,34 @@ class Mixer {
   masterMix(){
     return this._masterMix
   }
-  reverb(){
-    return this._reverb.node()
+  wetMix(){
+    return this._wetMix
   }
-  delay(){
-    return this._delay.node()
+
+  dryMix(){
+    return this._dryMix
   }
-  compressor(){
-    return this._compressor.node()
-  }
+  // reverb(){
+  //   return this._reverb.node()
+  // }
+  // delay(){
+  //   return this._delay.node()
+  // }
+  // compressor(){
+  //   return this._compressor.node()
+  // }
   
-  toggleReverb(isOn){
-    this._reverb.toggleOn(isOn)
-  }
-  reverbBuffer(buffer){
-    this._reverb.setImpulse(buffer)
-  }
-  toggleDelay(isOn){
-    this._delay.toggleOn(isOn)
-  }
+  // toggleReverb(isOn){
+  //   console.log('[Mixer] toggletoggleReverb', isOn)
+  //   this._reverb.toggleOn(isOn)
+  // }
+  // reverbBuffer(buffer){
+  //   this._reverb.setImpulse(buffer)
+  // }
+  // toggleDelay(isOn){
+  //   this._delay.toggleOn(isOn)
+  // }
+
   // addTrack(){
   //   const id = this._tracks.length
   //   const track = new Track(id, this._context, this._masterMix, this.reverb(), this.delay())

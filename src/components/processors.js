@@ -9,84 +9,31 @@ import Processor from './processor'
 
 import classes from './processors.module.scss'
 
-import useDrumr from '../hooks/useDrumr'
 
-// const API_URL = 'http://some-api.com'
+// import useDrumr from '../hooks/useDrumr'
+import useReverb from '../hooks/useReverb'
+import useDelay from '../hooks/useDelay'
+import useCompressor from '../hooks/useCompressor'
 
 const Processors = () => {
 
-  const { verbBuffers, assignReverbBuffer, toggleReverb } = useDrumr();
+  const { verbBuffers, reverbOn, setReverbOn, reverbId, setReverbId } = useReverb()
 
-  // reverb processing
-  const [reverbId, setReverbId] = useState(0)
-  const [reverbOn, setReverbOn] = useState(false)
-  // dekay processing
-  const [delayTime, setDelayTime] = useState(.5)
-  const [delayFeedback, setDelayFeedback] = useState(.475)
-  const [delayFrequency, setDelayFrequency] = useState(1000)
-  const [delayOn, setDelayOn] = useState(false)
-  // compressor processing
-  const [compThreshold, setCompThreshold] = useState(-24)
-  const [compKnee, setCompKnee] = useState(30)
-  const [compRatio, setCompRatio] = useState(12)
-  const [compAttack, setCompAttack] = useState(0.01)
-  const [compRelease, setCompRelease] = useState(0.25)
-  const [compOn, setCompOn] = useState(false)
+  const { delayOn, setDelayOn, delayTime, setDelayTime, delayFeedback, setDelayFeedback, delayFrequency, setDelayFrequency } = useDelay()
 
-  useEffect(() => {
-    if (verbBuffers) {
-      // console.log('[ Processors ] verbBuffers', verbBuffers.length)
-    }  
-    return (() => {
-      
-    })
-  }, [verbBuffers]);
-
-  useEffect(() => {
-    console.log('[Processors] reverb id', reverbId)
-    // update reverb
-    assignReverbBuffer(verbBuffers[reverbId].buffer)
-    return (() => {
-      
-    })
-  }, [reverbId])
-
-  useEffect(() => {
-    console.log('[Processors] reverb on', reverbOn)
-    // update reverb
-    toggleReverb(reverbOn)
-    return (() => {
-      
-    })
-  }, [reverbOn])
-
-  useEffect(() => {
-    console.log('[Processors] delay', delayTime, delayFeedback, delayFrequency, delayOn)
-    // update delay
-    return (() => {
-      
-    })
-  }, [delayTime, delayFeedback, delayFrequency, delayOn])
-
-  useEffect(() => {
-    console.log('[Processors] compressor', compThreshold, compKnee, compRatio, compAttack, compRelease, compOn)
-    // update compressor
-    return (() => {
-      
-    })
-  }, [compThreshold, compKnee, compRatio, compAttack, compRelease, compOn])
+  const { compOn, setCompOn, compThreshold, setCompThreshold, compKnee, setCompKnee, compRatio, setCompRatio, compAttack, setCompAttack, compRelease, setCompRelease } = useCompressor()
 
   return (
     <div className={classes.processors}>
-      <Processor type='reverb'>
-        <Control>
-          <Label>Reverb</Label>
-          <Switch isOn={reverbOn} onClick={ () => setReverbOn(!reverbOn)} activeClass='rgb(21, 255, 0)' />
-        </Control>
-        <Control>  
-          <Select options={verbBuffers} onValueChange={value => setReverbId(value)} initialValue={reverbId.toString()} />
-        </Control>
-      </Processor>
+      { verbBuffers && <Processor type='reverb'>
+                          <Control>
+                            <Label>Reverb</Label>
+                            <Switch isOn={reverbOn} onClick={ () => setReverbOn(!reverbOn)} activeClass='rgb(21, 255, 0)' />
+                          </Control>
+                          <Control>  
+                            <Select options={verbBuffers} onValueChange={value => setReverbId(value)} initialValue={reverbId.toString()} />
+                          </Control>
+                        </Processor> }
 
       <Processor type='delay'>
         <Control>
