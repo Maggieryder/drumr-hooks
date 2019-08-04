@@ -4,16 +4,27 @@ import { DrumrContext } from '../context/DrumrContext'
 // import * as ACTIONS from '../actions'
 import * as TYPES from '../actions/types'
 
-// import { initAudioCtx } from '../api/AudioCtx'
+import Track from '../api/Track'
 import { Sample, PannerNode, connectGain, trigger } from '../api/Sample'
 
 // import tracksReducer, { initialState } from '../reducers/tracksReducer'
 
+// import { initAudioCtx } from '../api/AudioCtx'
+// import Mixer from '../api/Mixer'
+// import Reverb from '../api/Reverb'
+// import Delay from '../api/Delay'
+// import Compressor from '../api/Compressor'
+// import Track from '../api/Track'
+// import Sequencer from '../api/Sequencer'
 
+// const AUDIO_CONTEXT = initAudioCtx();
+// const MIXER = new Mixer(AUDIO_CONTEXT)
+// const REVERB = new Reverb(AUDIO_CONTEXT, MIXER.wetMix())
+// const DELAY = new Delay(AUDIO_CONTEXT, MIXER.wetMix())
+// const COMPRESSOR = new Compressor(AUDIO_CONTEXT, MIXER.masterMix())
+// const SEQUENCER = new Sequencer(AUDIO_CONTEXT)
 
-import Mixer from '../api/Mixer'
-import Track from '../api/Track'
-// import SQR from '../api/Sequencer'
+import { AUDIO_CONTEXT, MIXER, REVERB, DELAY } from '../api'
 
 // const initialTracksState = {
 //   all: [],
@@ -59,7 +70,7 @@ const useDrumr = () => {
      } = controller
 
 
-  const mixer = new Mixer(context)
+ 
 
   // const [tracks, dispatch] = useReducer(tracksReducer, initialState)
 
@@ -84,7 +95,7 @@ const useDrumr = () => {
   }
 
   const addTrack = (id) => {
-    const track = new Track(id, context, mixer)
+    const track = new Track(id, AUDIO_CONTEXT, MIXER)
     // console.log('addTrack', track)
     // setState(state => ({ 
     //   ...state, 
@@ -120,7 +131,7 @@ const useDrumr = () => {
       request.open('get', url, true);
       request.responseType = 'arraybuffer';
       request.onload = function() {
-        context.decodeAudioData(request.response, function(buffer) {
+        AUDIO_CONTEXT.decodeAudioData(request.response, function(buffer) {
           callback(buffer);
         },
         function(e){ alert("Error with decoding audio data", e ); });
@@ -177,12 +188,14 @@ const useDrumr = () => {
     // }  
   }
   const triggerSample = (buffer, time) => {
-    const sample = new Sample( context, buffer ),
-    pannedSample = new PannerNode( context, sample)
-    console.log('mixer.masterMix',mixer.reverb())
-    connectGain(context, pannedSample, mixer.reverb())
-    connectGain(context, pannedSample, mixer.delay())
-    connectGain(context, pannedSample, mixer.masterMix())
+    const sample = new Sample( AUDIO_CONTEXT, buffer ),
+    pannedSample = new PannerNode( AUDIO_CONTEXT, sample)
+    console.log('REVERB.node()', REVERB.node())
+    console.log('DELAY.node()', DELAY.node())
+    console.log('MIXER.masterMix()', MIXER.masterMix())
+    connectGain(AUDIO_CONTEXT, pannedSample, REVERB.node() )
+    connectGain(AUDIO_CONTEXT, pannedSample, DELAY.node() )
+    connectGain(AUDIO_CONTEXT, pannedSample, MIXER.masterMix())
     trigger(sample, time);
   }
 
@@ -212,13 +225,13 @@ const useDrumr = () => {
   }
 
   const toggleReverb = (isOn) => {
-    mixer.toggleReverb(isOn)
+    REVERB.toggleReverb(isOn)
   }
   const assignReverbBuffer = (buffer) => {
-    mixer.reverbBuffer(buffer)
+    REVERB.reverbBuffer(buffer)
   }
   const toggleDelay = (isOn) => {
-    mixer.toggleDelay(isOn)
+    DELAY.toggleDelay(isOn)
   }
 
   // const updateWetVolume = (val) => {

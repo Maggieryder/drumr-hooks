@@ -13,7 +13,7 @@ export const initialState = {
 }
 
 export default function(state = initialState, action) {
-  console.log('tracksReducer action', action)
+  console.log('trackReducer action', action)
   switch (action.type){
     case TYPES.SOLO_TRACK:
         return {

@@ -3,23 +3,25 @@ import { Sample, PannerNode, trigger } from './Sample'
 // import Panner from './Panner'
 // import AudioProcessor from './AudioProcessor'
 
+import { AUDIO_CONTEXT, MIXER, REVERB, DELAY } from './'
+
 
 export default class Track {
   constructor(id, context, mixer){
     this._trackId = id
-    this._context = context
-    this._destination = mixer.dryMix()
-    this._reverbNode = mixer.reverb()
-    this._delayNode = mixer.delay()
+    this._context = AUDIO_CONTEXT
+    this._destination = MIXER.dryMix()
+    this._reverbNode = REVERB.node()
+    this._delayNode = DELAY.node()
     this._buffer = null
     // this.store = store;
     // this.store.subscribe(this.updateState.bind(this));
 
-    this._outputGain = this._context.createGain()
-    this._reverbSendGain = this._context.createGain()
-    this._delaySendGain = this._context.createGain()
+    this._outputGain = AUDIO_CONTEXT.createGain()
+    this._reverbSendGain = AUDIO_CONTEXT.createGain()
+    this._delaySendGain = AUDIO_CONTEXT.createGain()
 
-    this._panner = new PannerNode(this._context)
+    this._panner = new PannerNode(AUDIO_CONTEXT)
     this._panner.connect(this._reverbSendGain)
     this._panner.connect(this._delaySendGain)
     this._panner.connect(this._outputGain)
@@ -147,7 +149,7 @@ export default class Track {
     // connectGain(context, pannedSample, mixer.reverb())
     // connectGain(context, pannedSample, mixer.delay())
     // connectGain(context, pannedSample, mixer.masterMix())
-    const sample = new Sample( this._context, this._buffer )
+    const sample = new Sample( AUDIO_CONTEXT, this._buffer )
 
     sample.connect(this._panner);
     // this._panner.connect(this._reverbSendGain)

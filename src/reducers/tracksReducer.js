@@ -11,7 +11,7 @@ export const initialState = {
     // delaySends: []
 }
 export default function(state = initialState, action) {
-  console.log('tracksReducer action', action)
+  // console.log('tracksReducer action', action)
   switch (action.type){
     case TYPES.ADD_TRACK:
         return {
